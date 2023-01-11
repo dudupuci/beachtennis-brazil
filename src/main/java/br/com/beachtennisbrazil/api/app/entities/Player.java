@@ -1,6 +1,5 @@
 package br.com.beachtennisbrazil.api.app.entities;
 
-import br.com.beachtennisbrazil.api.app.entities.enums.TypeOfGame;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,13 +21,12 @@ public class Player extends Person {
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
-
     @ManyToOne
-    @JoinColumn(name = "quota_id")
-    private Quota quota;
+    @JoinColumn(name = "plan_id")
+    private SubscriptionPlan plan;
 
-    private LocalDateTime dateOfRegistrationOfHours = LocalDateTime.now();
-    private Integer entryTime;
-    private Integer contractedHours;
-    private Integer exitTime;
+    private LocalDateTime registrationDate = LocalDateTime.now();
+    //private Integer entryTime;
+    //private Integer contractedHours;
+    //private Integer exitTime;
 }

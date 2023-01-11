@@ -1,18 +1,12 @@
 package br.com.beachtennisbrazil.api.app.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Transient;
+import br.com.beachtennisbrazil.api.app.enums.SubscriptionPlanName;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -20,16 +14,19 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Quota {
+public class SubscriptionPlan {
+
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
-    private Integer numberOfPlayersInQuota;
-    @Transient
-    private List<Player> players = new ArrayList<>();
+    @Enumerated(EnumType.STRING)
+    private SubscriptionPlanName planName;
+    private Integer numberOfPersonsThePlanSupports;
+    //@Transient
+    //private List<Player> players = new ArrayList<>();
+    //private LocalDateTime purchaseDate = LocalDateTime.now();
+    //private LocalDateTime renewalDate;
     private Double value;
-    private LocalDateTime purchaseDate;
-    private LocalDateTime renewalDate;
-
+    private boolean isActive;
 }

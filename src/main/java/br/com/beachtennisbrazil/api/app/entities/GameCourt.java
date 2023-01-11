@@ -1,9 +1,7 @@
 package br.com.beachtennisbrazil.api.app.entities;
 
-import br.com.beachtennisbrazil.api.app.entities.enums.TypeOfGame;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import br.com.beachtennisbrazil.api.app.enums.TypeOfGame;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,6 +26,7 @@ public class GameCourt {
     private Integer startTime;
     private Integer endTime;
     private Integer playersOnTheCourt;
+    @Enumerated(EnumType.STRING)
     private TypeOfGame typeOfGame;
 
 }
