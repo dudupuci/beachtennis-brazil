@@ -1,8 +1,9 @@
 package br.com.beachtennisbrazil.api.app.controllers;
 
+import br.com.beachtennisbrazil.api.app.entities.GameCourt;
 import br.com.beachtennisbrazil.api.app.entities.Player;
+import br.com.beachtennisbrazil.api.app.serviceimpl.GameCourtService;
 import br.com.beachtennisbrazil.api.app.serviceimpl.PlayerService;
-import io.swagger.models.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,26 +14,26 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping(path = "/players")
+@RequestMapping(path = "/games")
 @CrossOrigin("*")
-public class PlayerController {
+public class GameCourtController {
 
     @Autowired
-    private PlayerService service;
+    private GameCourtService service;
 
     @GetMapping
-    public ResponseEntity<List<Player>> findAll() {
+    public ResponseEntity<List<GameCourt>> findAll() {
         return ResponseEntity.ok().body(service.findAll());
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Player> findById(@PathVariable("id") UUID id) {
+    public ResponseEntity<GameCourt> findById(@PathVariable("id") UUID id) {
         return ResponseEntity.ok().body(service.findById(id));
     }
 
     @PostMapping
-    public ResponseEntity<HttpResponse.ResponseInfo> save(@RequestBody Player player) {
-        service.save(player);
+    public ResponseEntity<HttpResponse.ResponseInfo> save(@RequestBody GameCourt gameCourt) {
+        service.createGameCourt(gameCourt);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }

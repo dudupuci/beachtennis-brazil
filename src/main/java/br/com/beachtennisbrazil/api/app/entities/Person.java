@@ -7,7 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.UniqueConstraint;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,7 +18,8 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public class Person {
     private String name;
-    private String document;
+    @Column(name = "document", unique = true)
+    private String cpf;
     private String telephone;
 
 

@@ -24,10 +24,6 @@ public class SubscriptionPlan {
     @Enumerated(EnumType.STRING)
     private SubscriptionPlanName planName;
     private Integer numberOfPersonsThePlanSupports;
-    //@Transient
-    //private List<Player> players = new ArrayList<>();
-    //private LocalDateTime purchaseDate = LocalDateTime.now();
-    //private LocalDateTime renewalDate;
     private Double value;
     private boolean isActive;
 }

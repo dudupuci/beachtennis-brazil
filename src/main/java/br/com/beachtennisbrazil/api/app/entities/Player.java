@@ -1,8 +1,11 @@
 package br.com.beachtennisbrazil.api.app.entities;
 
 import br.com.beachtennisbrazil.api.app.dto.PlayerDTO;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -14,6 +17,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@JsonPropertyOrder({"id", "name", "document", "telephone", "plan", "registrationDate" })
 public class Player extends Person {
 
     @Id
@@ -24,10 +28,8 @@ public class Player extends Person {
     @JoinColumn(name = "plan_id")
     private SubscriptionPlan plan;
 
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+    @JsonFormat(pattern = "YYYY-MM-dd HH:mm")
     private LocalDateTime registrationDate = LocalDateTime.now();
-    //private Integer entryTime;
-    //private Integer contractedHours;
-    //private Integer exitTime;
-
 
 }

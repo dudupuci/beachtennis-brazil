@@ -12,6 +12,4 @@ public interface PlayerServiceInterface {
     void updateData(Player oldPlayer, Player newPlayer);
     void updateAndSavePlayer(UUID id, Player newPlayer);
     void deletePlayerById(UUID id);
-
-
 }

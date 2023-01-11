@@ -1,14 +1,20 @@
 package br.com.beachtennisbrazil.api.app.entities;
 
 import br.com.beachtennisbrazil.api.app.enums.TypeOfGame;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -16,16 +22,22 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
+@JsonPropertyOrder({"id", "gameDate", "typeOfGame", "startTime", "endTime", "contractedHours", "quantityPlayingNow" })
 public class GameCourt {
 
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
-    private LocalDateTime gameDate;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+    @JsonFormat(pattern = "YYYY-MM-dd HH:mm")
+    private LocalDateTime gameDate = LocalDateTime.now();
+    @JsonFormat(pattern = "HH:mm:ss")
     private Integer startTime;
+    private Integer contractedHours;
+    @JsonFormat(pattern = "HH:mm:ss")
     private Integer endTime;
-    private Integer playersOnTheCourt;
+    private Integer quantityPlayingNow;
     @Enumerated(EnumType.STRING)
     private TypeOfGame typeOfGame;
 
