@@ -1,12 +1,10 @@
 package br.com.beachtennisbrazil.api.app.entities;
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import br.com.beachtennisbrazil.api.app.dto.PlayerDTO;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -15,6 +13,7 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Player extends Person {
 
     @Id
@@ -29,4 +28,6 @@ public class Player extends Person {
     //private Integer entryTime;
     //private Integer contractedHours;
     //private Integer exitTime;
+
+
 }

@@ -1,10 +1,13 @@
 package br.com.beachtennisbrazil.api.app.entities;
 
-import jakarta.persistence.MappedSuperclass;
+
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.persistence.MappedSuperclass;
 
 @AllArgsConstructor
 @NoArgsConstructor
