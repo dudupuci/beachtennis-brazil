@@ -1,6 +1,5 @@
 package br.com.beachtennisbrazil.api.app.entities;
 
-import br.com.beachtennisbrazil.api.app.dto.PlayerDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.*;

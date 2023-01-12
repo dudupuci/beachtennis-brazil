@@ -32,7 +32,7 @@ public class GameCourtController {
     }
 
     @PostMapping
-    public ResponseEntity<HttpResponse.ResponseInfo> save(@RequestBody GameCourt gameCourt) {
+    public ResponseEntity<Void> save(@RequestBody GameCourt gameCourt) {
         service.createGameCourt(gameCourt);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
