@@ -37,8 +37,18 @@ public class GameCourt {
     private Integer contractedHours;
     @JsonFormat(pattern = "HH:mm:ss")
     private Integer endTime;
+    @Transient
+    private List<Loanable> loanables = new ArrayList<>();
     private Integer quantityPlayingNow;
     @Enumerated(EnumType.STRING)
     private TypeOfGame typeOfGame;
+    @Transient
+    private List<Player> players = new ArrayList<>();
+
+    /* Só pode ser iniciado caso seja um jogo simples de 2 pessoas ou duplas, 4 pessoas.
+       Só pode ser iniciado caso a quadra seja alocada por um dos jogadores,
+        o jogador cadastrado e a quadra paga.
+       Pode também ser iniciada caso seja aula, torneio, etc.
+     */
 
 }

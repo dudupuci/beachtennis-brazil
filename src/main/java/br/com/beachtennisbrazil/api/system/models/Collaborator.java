@@ -1,6 +1,5 @@
 package br.com.beachtennisbrazil.api.system.models;
 
-import br.com.beachtennisbrazil.api.app.entities.Person;
 import br.com.beachtennisbrazil.api.system.enums.CollaboratorPaper;
 import br.com.beachtennisbrazil.api.system.enums.TypeOfContract;
 import lombok.Getter;
@@ -14,7 +13,7 @@ import java.util.UUID;
 @Entity
 @Getter
 @Setter
-public class Collaborator extends Person {
+public class Collaborator {
 
     @Id
     @GeneratedValue(generator = "UUID")

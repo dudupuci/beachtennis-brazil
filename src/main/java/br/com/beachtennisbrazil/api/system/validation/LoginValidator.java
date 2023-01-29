@@ -1,7 +1,6 @@
 package br.com.beachtennisbrazil.api.system.validation;
 
-import br.com.beachtennisbrazil.api.system.models.Login;
-import lombok.AllArgsConstructor;
+import br.com.beachtennisbrazil.api.system.validation.interfaces.LoginValidatorInterface;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

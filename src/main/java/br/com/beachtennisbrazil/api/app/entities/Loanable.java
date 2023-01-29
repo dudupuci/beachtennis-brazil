@@ -23,4 +23,6 @@ public class Loanable {
     private UUID id;
     @Enumerated(EnumType.STRING)
     private LoanableItem name;
+
+    // Raquetes e bolinhas a principio, uma quadra pode ter no máximo 4 raquetes e 3 bolinhas emprestadas.
 }

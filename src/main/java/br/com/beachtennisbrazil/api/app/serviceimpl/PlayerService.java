@@ -48,6 +48,10 @@ public class PlayerService implements PlayerServiceInterface {
 
     @Override
     public void deletePlayerById(UUID id) {
-
+        try {
+            repository.deleteById(id);
+        } catch (Exception err) {
+            throw new RuntimeException(""+ err.getMessage());
+        }
     }
 }

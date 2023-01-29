@@ -17,7 +17,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Builder
 @JsonPropertyOrder({"id", "name", "document", "telephone", "plan", "registrationDate" })
-public class Player extends Person {
+public class Player {
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -27,8 +27,21 @@ public class Player extends Person {
     @JoinColumn(name = "plan_id")
     private SubscriptionPlan plan;
 
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "document", unique = true)
+    private String cpf;
+
+    @Column(name = "telephone")
+    private String telephone;
+
+    @Column(name = "document")
+    private String document;
+
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     @JsonFormat(pattern = "YYYY-MM-dd HH:mm")
     private LocalDateTime registrationDate = LocalDateTime.now();
+
 
 }

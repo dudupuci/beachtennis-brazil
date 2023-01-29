@@ -1,4 +1,4 @@
-package br.com.beachtennisbrazil.api.system.controller;
+package br.com.beachtennisbrazil.api.system.controllers;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

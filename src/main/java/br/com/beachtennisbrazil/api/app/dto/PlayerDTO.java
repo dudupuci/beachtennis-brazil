@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter
@@ -13,19 +14,21 @@ import java.util.UUID;
 public class PlayerDTO {
 
     private UUID id;
-    @JsonProperty("name")
     private String name;
     private String telephone;
+    private String cpf;
     private String document;
     private SubscriptionPlan plan;
-
-   public void toEntity(Player player) {
-       this.id = player.getId();
-       this.name = player.getName();
-       this.telephone = player.getTelephone();
-       this.plan = player.getPlan();
-   }
-
-
-
+    private LocalDateTime registrationDate;
+    public Player toEntity() {
+        return Player.builder()
+                .id(this.id)
+                .plan(this.plan)
+                .name(this.name)
+                .cpf(this.cpf)
+                .telephone(this.telephone)
+                .document(this.document)
+                .registrationDate(this.registrationDate)
+                .build();
+    }
 }

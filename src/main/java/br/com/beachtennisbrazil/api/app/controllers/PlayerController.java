@@ -35,4 +35,10 @@ public class PlayerController {
         service.save(player);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> deleteById(@PathVariable("id") UUID id) {
+        service.deletePlayerById(id);
+        return ResponseEntity.noContent().build();
+    }
 }
