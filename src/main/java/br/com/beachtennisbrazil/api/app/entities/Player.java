@@ -1,5 +1,6 @@
 package br.com.beachtennisbrazil.api.app.entities;
 
+import br.com.beachtennisbrazil.api.app.dto.PlayerDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.*;
@@ -36,12 +37,20 @@ public class Player {
     @Column(name = "telephone")
     private String telephone;
 
-    @Column(name = "document")
-    private String document;
-
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     @JsonFormat(pattern = "YYYY-MM-dd HH:mm")
     private LocalDateTime registrationDate = LocalDateTime.now();
+
+    public PlayerDTO toDto() {
+        return PlayerDTO.builder()
+                .id(this.id)
+                .name(this.name)
+                .telephone(this.telephone)
+                .cpf(this.cpf)
+                .plan(this.plan)
+                .registrationDate(this.registrationDate)
+                .build();
+    }
 
 
 }

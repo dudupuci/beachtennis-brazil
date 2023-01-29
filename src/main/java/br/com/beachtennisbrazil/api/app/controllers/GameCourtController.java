@@ -2,6 +2,7 @@ package br.com.beachtennisbrazil.api.app.controllers;
 
 import br.com.beachtennisbrazil.api.app.entities.GameCourt;
 import br.com.beachtennisbrazil.api.app.entities.Player;
+import br.com.beachtennisbrazil.api.app.exceptions.handlers.GameCourtExceptionHandler;
 import br.com.beachtennisbrazil.api.app.serviceimpl.GameCourtService;
 import br.com.beachtennisbrazil.api.app.serviceimpl.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -13,6 +13,7 @@ import br.com.beachtennisbrazil.api.app.service.PlayerServiceInterface;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.List;
 import java.util.UUID;
@@ -44,11 +45,14 @@ public class GameCourtService implements GameCourtServiceInterface {
 
             if (validator == true) {
                 repository.save(gameCourt);
+            } else {
+                throw new RuntimeException("Cannot create a game: Check the fields!");
             }
 
         } catch (Exception err) {
-            throw new CannotCreateGameCourtException("Cannot create a game: "+err.getMessage());
+            throw new CannotCreateGameCourtException("Cannot create a game: " + err.getMessage());
         }
+
     }
 
     @Override
@@ -72,7 +76,7 @@ public class GameCourtService implements GameCourtServiceInterface {
             updateAndSaveGameCourt(oldGameCourt.getId(), newGameCourt);
             repository.save(newGameCourt);
         } catch (Exception err) {
-            throw new CannotUpdateGameCourtException("Captured error: "+err.getMessage());
+            throw new CannotUpdateGameCourtException("Captured error: " + err.getMessage());
         }
 
     }
@@ -82,7 +86,7 @@ public class GameCourtService implements GameCourtServiceInterface {
         try {
             repository.deleteById(id);
         } catch (Exception err) {
-            throw new EntityNotFoundException("Captured error: Game Court ID: "+id+ " has not found! "+err.getMessage());
+            throw new EntityNotFoundException("Captured error: Game Court ID: " + id + " has not found! " + err.getMessage());
         }
 
     }
