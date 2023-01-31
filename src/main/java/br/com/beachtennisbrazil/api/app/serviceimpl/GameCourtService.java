@@ -45,8 +45,6 @@ public class GameCourtService implements GameCourtServiceInterface {
 
             if (validator == true) {
                 repository.save(gameCourt);
-            } else {
-                throw new RuntimeException("Cannot create a game: Check the fields!");
             }
 
         } catch (Exception err) {

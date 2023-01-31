@@ -1,13 +1,11 @@
 package br.com.beachtennisbrazil.api.app.entities;
 
+import br.com.beachtennisbrazil.api.app.dto.GameCourtDTO;
 import br.com.beachtennisbrazil.api.app.enums.TypeOfGame;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -23,6 +21,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
+@Builder
 @JsonPropertyOrder({"id", "gameDate", "typeOfGame", "startTime", "endTime", "contractedHours", "quantityPlayingNow" })
 public class GameCourt {
 
@@ -53,4 +52,17 @@ public class GameCourt {
        Pode também ser iniciada caso seja aula, torneio, etc.
      */
 
+    public GameCourtDTO toDto() {
+        return GameCourtDTO.builder()
+                .id(this.id)
+                .gameDate(this.gameDate)
+                .startTime(this.startTime)
+                .contractedHours(this.contractedHours)
+                .endTime(this.endTime)
+                .loanables(this.loanables)
+                .quantityPlayingNow(this.quantityPlayingNow)
+                .typeOfGame(this.typeOfGame)
+                .players(this.players)
+                .build();
+    }
 }

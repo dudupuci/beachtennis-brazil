@@ -14,12 +14,11 @@ import java.util.regex.Pattern;
 public class LoginValidator implements LoginValidatorInterface {
 
     @Override
-    public boolean validateLogin(String username) {
+    public boolean validateUsername(String username) {
         if (username == null || username.isBlank() || username.trim().isEmpty()) {
             return false;
         } if (username.length() <= 4 || username.length() >= 24) {
             return false;
-
         } if (username.startsWith(String.valueOf(Integer.class))) {
             return false;
         }
@@ -30,7 +29,7 @@ public class LoginValidator implements LoginValidatorInterface {
     public boolean validatePassword(String password) {
         Pattern specialCharacters = Pattern.compile("[^A-Za-z0-9]");
         Matcher matcher = specialCharacters.matcher(password);
-        if (password == null ||  password.isBlank() || password.trim().isEmpty()) {
+        if (password == null || password.isBlank() || password.trim().isEmpty()) {
             return false;
         } if (password.length() <= 8 || password.length() >= 48) {
             return false;
