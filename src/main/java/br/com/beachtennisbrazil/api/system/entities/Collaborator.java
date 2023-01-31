@@ -1,4 +1,4 @@
-package br.com.beachtennisbrazil.api.system.models;
+package br.com.beachtennisbrazil.api.system.entities;
 
 import br.com.beachtennisbrazil.api.system.enums.CollaboratorPaper;
 import br.com.beachtennisbrazil.api.system.enums.TypeOfContract;

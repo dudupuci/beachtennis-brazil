@@ -1,4 +1,4 @@
-package br.com.beachtennisbrazil.api.system.models;
+package br.com.beachtennisbrazil.api.system.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
