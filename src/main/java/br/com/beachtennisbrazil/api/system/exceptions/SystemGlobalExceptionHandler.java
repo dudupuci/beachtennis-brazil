@@ -25,4 +25,18 @@ public class SystemGlobalExceptionHandler {
         );
         return ResponseEntity.status(status).body(response);
     }
+
+    @ExceptionHandler(UsernameAlreadyExistsException.class)
+    public ResponseEntity<StandardResponseError> standardErrorUsernameAlreadyExistsException(UsernameAlreadyExistsException exception, HttpServletRequest request) {
+        String error = "Username already exists on database!";
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        StandardResponseError response = new StandardResponseError(
+                Instant.now(),
+                status.value(),
+                error,
+                exception.getMessage(),
+                request.getRequestURI()
+        );
+        return ResponseEntity.status(status).body(response);
+    }
 }
