@@ -35,6 +35,11 @@ public class LoginController {
         return ResponseEntity.ok().body(authentication);
     }
 
+    @PostMapping(value = "/account-lost")
+    public ResponseEntity<LoginDTO> recoverPassword(@RequestBody LoginDTO loginDto) {
+        return ResponseEntity.ok().body(loginDto);
+    }
+
     @DeleteMapping
     public ResponseEntity<Void> deleteAll() {
         service.deleteLogins();

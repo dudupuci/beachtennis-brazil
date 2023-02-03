@@ -16,12 +16,15 @@ public class LoginDTO {
     private UUID id;
     private String username;
     private String password;
+    @JsonIgnore
+    private String email;
 
     public Login toLogin() {
         return Login.builder()
                 .id(this.id)
                 .username(this.username)
                 .password(this.password)
+                .email(this.email)
                 .build();
     }
 }

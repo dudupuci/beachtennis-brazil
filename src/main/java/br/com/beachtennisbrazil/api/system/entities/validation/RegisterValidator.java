@@ -15,9 +15,11 @@ import java.util.regex.Pattern;
 public class RegisterValidator implements RegisterValidatorInterface {
 
     @Override
-    public boolean validateFields(String username, String password, String confirmPassword) {
+    public boolean validateFields(String username, String password, String confirmPassword, String email) {
         Pattern specialCharacters = Pattern.compile("[^A-Za-z0-9]");
+        Pattern emailFormat = Pattern.compile("^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$");
         Matcher matcher = specialCharacters.matcher(password);
+        Matcher emailMatcher = emailFormat.matcher(email);
 
         if (username == null || username.isBlank() || username.trim().isEmpty()) {
             throw new InvalidUsernameException("Username is null, blank or empty!");
@@ -27,6 +29,10 @@ public class RegisterValidator implements RegisterValidatorInterface {
 
         if (!confirmPassword.equals(password)) {
             throw new ConfirmationPasswordDoesNotMatchThePassword("Confirmation password does not match the password.");
+        }
+
+        if (!emailMatcher.find() || email.length() < 6) {
+            throw new InvalidEmailException("Please, verify the email format and try again.");
         }
 
         if (password == null || password.isBlank() || password.trim().isEmpty()) {

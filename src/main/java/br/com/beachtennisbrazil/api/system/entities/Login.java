@@ -22,6 +22,8 @@ public class Login {
     @Column(name = "login", unique = true)
     private String username;
     private String password;
+    @Column(name = "email", unique = true)
+    private String email;
 
 
     public LoginDTO toDto() {
@@ -29,6 +31,7 @@ public class Login {
                 .id(this.id)
                 .username(this.username)
                 .password(this.password)
+                .email(this.email)
                 .build();
     }
 

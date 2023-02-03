@@ -22,7 +22,11 @@ public class RegisterService implements RegistrationInterface {
     @Override
     public Boolean validateRegistration(Register register) {
         RegisterValidator validator = new RegisterValidator();
-        validator.validateFields(register.getUsername(), register.getPassword(), register.getConfirmPassword());
+        validator.validateFields(
+                register.getUsername(),
+                register.getPassword(),
+                register.getConfirmPassword(),
+                register.getEmail());
 
         if (register != null) {
             return true;
