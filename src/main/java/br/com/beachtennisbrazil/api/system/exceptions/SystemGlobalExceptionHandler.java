@@ -39,4 +39,18 @@ public class SystemGlobalExceptionHandler {
         );
         return ResponseEntity.status(status).body(response);
     }
+
+    @ExceptionHandler(CannotFindLoginInDatabaseException.class)
+    public ResponseEntity<StandardResponseError> standardErrorCannotFindLoginInDatabaseException(CannotFindLoginInDatabaseException exception, HttpServletRequest request) {
+        String error = "Cannot find login in database!";
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        StandardResponseError response = new StandardResponseError(
+                Instant.now(),
+                status.value(),
+                error,
+                exception.getMessage(),
+                request.getRequestURI()
+        );
+        return ResponseEntity.status(status).body(response);
+    }
 }

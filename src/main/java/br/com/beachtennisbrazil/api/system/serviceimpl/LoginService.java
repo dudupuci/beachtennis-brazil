@@ -30,12 +30,11 @@ public class LoginService implements LoginInterface {
     @Override
     public LoginDTO authenticate(Login login) {
         var authentication = repository.findByUsernameAndPassword(login.getUsername(), login.getPassword());
-        var dto = authentication.toDto();
 
         if (authentication != null) {
-            return dto;
+            return authentication.toDto();
         } else {
-            throw new CannotFindLoginInDatabaseException("");
+            throw new CannotFindLoginInDatabaseException("Forgot your username or password?");
         }
     }
 

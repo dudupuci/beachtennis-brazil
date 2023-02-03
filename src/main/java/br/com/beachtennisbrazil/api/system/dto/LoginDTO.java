@@ -12,6 +12,7 @@ import java.util.UUID;
 @Getter
 public class LoginDTO {
 
+    @JsonIgnore
     private UUID id;
     private String username;
     private String password;
