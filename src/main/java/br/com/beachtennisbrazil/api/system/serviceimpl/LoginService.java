@@ -1,9 +1,11 @@
 package br.com.beachtennisbrazil.api.system.serviceimpl;
 
 import br.com.beachtennisbrazil.api.app.exceptions.CannotCreateGameCourtException;
+import br.com.beachtennisbrazil.api.system.dto.LoginDTO;
 import br.com.beachtennisbrazil.api.system.entities.Login;
 import br.com.beachtennisbrazil.api.system.exceptions.CannotFindLoginInDatabaseException;
 import br.com.beachtennisbrazil.api.system.repositories.LoginRepository;
+import br.com.beachtennisbrazil.api.system.repositories.RegisterRepository;
 import br.com.beachtennisbrazil.api.system.service.LoginInterface;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,17 +21,19 @@ public class LoginService implements LoginInterface {
     @Autowired
     private LoginRepository repository;
 
+
     @Override
     public Login findById(UUID id) {
         return repository.findById(id).orElseThrow(() -> new CannotCreateGameCourtException("Cannot find login!"));
     }
 
     @Override
-    public Login authenticate(Login login) {
-        var authentication = repository.findById(login.getId());
+    public LoginDTO authenticate(Login login) {
+        var authentication = repository.findByUsernameAndPassword(login.getUsername(), login.getPassword());
+        var dto = authentication.toDto();
 
         if (authentication != null) {
-            return authentication.get();
+            return dto;
         } else {
             throw new CannotFindLoginInDatabaseException("");
         }

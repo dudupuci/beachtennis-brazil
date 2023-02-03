@@ -1,5 +1,6 @@
 package br.com.beachtennisbrazil.api.system.controllers;
 
+import br.com.beachtennisbrazil.api.system.dto.LoginDTO;
 import br.com.beachtennisbrazil.api.system.entities.Login;
 import br.com.beachtennisbrazil.api.system.serviceimpl.LoginService;
 import io.swagger.models.Response;
@@ -29,8 +30,8 @@ public class LoginController {
     }
 
     @PostMapping
-    public ResponseEntity<Login> authenticate(@RequestBody Login login) {
-        var authentication = service.authenticate(login);
+    public ResponseEntity<LoginDTO> authenticate(@RequestBody LoginDTO loginDto) {
+        var authentication = service.authenticate(loginDto.toLogin());
         return ResponseEntity.ok().body(authentication);
     }
 

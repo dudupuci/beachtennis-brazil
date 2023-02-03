@@ -26,6 +26,7 @@ public class Login {
 
     public LoginDTO toDto() {
         return LoginDTO.builder()
+                .id(this.id)
                 .username(this.username)
                 .password(this.password)
                 .build();
