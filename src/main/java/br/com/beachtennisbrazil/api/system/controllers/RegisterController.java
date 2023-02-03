@@ -1,6 +1,8 @@
 package br.com.beachtennisbrazil.api.system.controllers;
 
+import br.com.beachtennisbrazil.api.system.dto.LoginDTO;
 import br.com.beachtennisbrazil.api.system.entities.Login;
+import br.com.beachtennisbrazil.api.system.entities.Register;
 import br.com.beachtennisbrazil.api.system.serviceimpl.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +18,8 @@ public class RegisterController {
     private RegisterService service;
 
     @PostMapping
-    public ResponseEntity<Login> register(@RequestBody Login login) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.save(login));
+    public ResponseEntity<String> register(@RequestBody Register register) {
+        service.convertRegisterToLogin(register);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Successfully registered! Username: "+register.getUsername());
     }
 }

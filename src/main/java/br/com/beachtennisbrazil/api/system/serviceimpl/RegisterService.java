@@ -1,6 +1,7 @@
 package br.com.beachtennisbrazil.api.system.serviceimpl;
 
 import br.com.beachtennisbrazil.api.system.entities.Login;
+import br.com.beachtennisbrazil.api.system.entities.Register;
 import br.com.beachtennisbrazil.api.system.entities.validation.RegisterValidator;
 import br.com.beachtennisbrazil.api.system.exceptions.CannotRegisterNewLoginException;
 import br.com.beachtennisbrazil.api.system.exceptions.LoginUsernameOrPasswordIsInvalidException;
@@ -19,25 +20,26 @@ public class RegisterService implements RegistrationInterface {
     private RegisterRepository repository;
 
     @Override
-    public Boolean validateRegistration(Login login) {
+    public Boolean validateRegistration(Register register) {
         RegisterValidator validator = new RegisterValidator();
-        validator.validateFields(login.getUsername(), login.getPassword());
+        validator.validateFields(register.getUsername(), register.getPassword(), register.getConfirmPassword());
 
-        if (login != null) {
+        if (register != null) {
             return true;
         } else {
-            throw new LoginUsernameOrPasswordIsInvalidException("Please, verify the fields and try again!");
+            throw new CannotRegisterNewLoginException("Please, verify the fields and try again!");
         }
     }
 
     @Override
-    public Login save(Login login) {
-        var verify = repository.findByUsername(login.getUsername());
-        if (validateRegistration(login) && verify == null) {
+    public Register convertRegisterToLogin(Register register) {
+        var verify = repository.findByUsername(register.getUsername());
+        if (validateRegistration(register) && verify == null) {
+            var login = register.createLogin();
             repository.save(login);
+            return register;
         } else {
-            throw new UsernameAlreadyExistsException("Login username: " +(login.getUsername())+" is already on database!");
+            throw new UsernameAlreadyExistsException("Login username is already on database!");
         }
-        return login;
     }
 }

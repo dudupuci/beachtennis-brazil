@@ -1,35 +1,33 @@
 package br.com.beachtennisbrazil.api.system.entities;
 
-import br.com.beachtennisbrazil.api.system.dto.LoginDTO;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.UUID;
 
-@Entity
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Login {
+public class Register {
 
-    @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
-    @Column(name = "login", unique = true)
     private String username;
     private String password;
+    private String confirmPassword;
 
-
-    public LoginDTO toDto() {
-        return LoginDTO.builder()
+    public Login createLogin() {
+        return Login.builder()
+                .id(this.id)
                 .username(this.username)
                 .password(this.password)
                 .build();
     }
-
 }
 
