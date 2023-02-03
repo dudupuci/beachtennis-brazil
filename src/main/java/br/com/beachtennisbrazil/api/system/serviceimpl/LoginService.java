@@ -39,6 +39,12 @@ public class LoginService implements LoginInterface {
     }
 
     @Override
+    public Login recoveryPassword(String email) {
+       var login = repository.findByEmail(email);
+       return login;
+    }
+
+    @Override
     public void deleteLogins() {
         repository.deleteAll();
     }

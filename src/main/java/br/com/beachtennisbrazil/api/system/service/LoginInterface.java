@@ -10,6 +10,8 @@ public interface LoginInterface {
     Login findById(UUID uuid);
     LoginDTO authenticate(Login login);
 
+    Login recoveryPassword(String email);
+
     void deleteLogins();
 
     List<Login> findAllUsernames();

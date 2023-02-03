@@ -1,6 +1,7 @@
 package br.com.beachtennisbrazil.api.system.controllers;
 
 import br.com.beachtennisbrazil.api.system.dto.LoginDTO;
+import br.com.beachtennisbrazil.api.system.dto.RecoveryPasswordDTO;
 import br.com.beachtennisbrazil.api.system.entities.Login;
 import br.com.beachtennisbrazil.api.system.serviceimpl.LoginService;
 import io.swagger.models.Response;
@@ -36,8 +37,9 @@ public class LoginController {
     }
 
     @PostMapping(value = "/account-lost")
-    public ResponseEntity<LoginDTO> recoverPassword(@RequestBody LoginDTO loginDto) {
-        return ResponseEntity.ok().body(loginDto);
+    public ResponseEntity<LoginDTO> recoverPassword(@RequestBody RecoveryPasswordDTO recovery) {
+        var login = service.recoveryPassword(recovery.getEmail());
+        return ResponseEntity.ok().body(login.toDto());
     }
 
     @DeleteMapping
