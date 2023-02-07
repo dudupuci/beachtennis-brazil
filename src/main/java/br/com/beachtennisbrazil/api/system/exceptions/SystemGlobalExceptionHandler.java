@@ -4,8 +4,10 @@ import io.swagger.models.Response;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.Instant;
@@ -72,6 +74,21 @@ public class SystemGlobalExceptionHandler {
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<StandardResponseError> standardErrorDataIntegrityViolationException(DataIntegrityViolationException exception, HttpServletRequest request) {
         String error = "Some value already exists on database!";
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        StandardResponseError response = new StandardResponseError(
+                Instant.now(),
+                status.value(),
+                error,
+                exception.getMessage(),
+                request.getRequestURI()
+        );
+        return ResponseEntity.status(status).body(response);
+    }
+
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public ResponseEntity<StandardResponseError> standardResponseErrorMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException exception, HttpServletRequest request) {
+        String error = "Wrong value or format informed at request param. Please, check the fields and try again!";
         HttpStatus status = HttpStatus.BAD_REQUEST;
         StandardResponseError response = new StandardResponseError(
                 Instant.now(),
