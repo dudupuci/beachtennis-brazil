@@ -30,7 +30,6 @@ public class LoginService implements LoginInterface {
     @Override
     public LoginDTO authenticate(Login login) {
         var authentication = repository.findByUsernameAndPassword(login.getUsername(), login.getPassword());
-
         if (authentication != null) {
             return authentication.toDto();
         } else {
