@@ -18,12 +18,13 @@ import java.util.Properties;
 @Getter
 @Setter
 public class JavaxMailTemplateSender {
+
     private String to;
     private String from;
     private String host;
     private String port;
 
-    public static void configuration(String to, String from) {
+    public static void configuration(String to, String from, String subject, String body) {
         JavaxMailTemplateSender mail = new JavaxMailTemplateSender();
         mail.setTo(to);
         mail.setFrom(from);
@@ -48,16 +49,11 @@ public class JavaxMailTemplateSender {
 
         try {
             MimeMessage message = new MimeMessage(session);
-            // Set From: header field of the header.
             message.setFrom(new InternetAddress(from));
-            // Set To: header field of the header.
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-            // Set Subject: header field
-            message.setSubject("This is the Subject Line!");
-            // Now set the actual message
-            message.setText("This is actual message");
+            message.setSubject(subject);
+            message.setText(body);
             System.out.println("sending...");
-            // Send message
             Transport.send(message);
             System.out.println("Sent message successfully....");
         } catch (MessagingException mex) {

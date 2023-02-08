@@ -6,6 +6,8 @@ import br.com.beachtennisbrazil.api.system.entities.validation.RegisterValidator
 import br.com.beachtennisbrazil.api.system.exceptions.CannotRegisterNewLoginException;
 import br.com.beachtennisbrazil.api.system.exceptions.LoginUsernameOrPasswordIsInvalidException;
 import br.com.beachtennisbrazil.api.system.exceptions.UsernameAlreadyExistsException;
+import br.com.beachtennisbrazil.api.system.javaxmail.JavaxMailTemplateSender;
+import br.com.beachtennisbrazil.api.system.javaxmail.templates.RegisterTemplateMapper;
 import br.com.beachtennisbrazil.api.system.repositories.RegisterRepository;
 import br.com.beachtennisbrazil.api.system.service.RegistrationInterface;
 import lombok.AllArgsConstructor;
@@ -41,6 +43,13 @@ public class RegisterService implements RegistrationInterface {
         if (validateRegistration(register) && verify == null) {
             var login = register.createLogin();
             repository.save(login);
+
+            JavaxMailTemplateSender.configuration(
+                    register.getEmail(),
+                    "dudupucinelli@gmail.com",
+                    RegisterTemplateMapper.getRegistrationSubject(),
+                    RegisterTemplateMapper.welcomeMessage(register.getUsername()));
+
             return register;
         } else {
             throw new UsernameAlreadyExistsException("Login username is already on database!");
