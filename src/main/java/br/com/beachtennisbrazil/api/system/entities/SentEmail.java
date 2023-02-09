@@ -4,7 +4,6 @@ import br.com.beachtennisbrazil.api.system.enums.TypeOfEmailSent;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.cglib.core.Local;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -19,7 +18,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class SentEmails {
+public class SentEmail {
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -35,7 +34,7 @@ public class SentEmails {
     @Column(name = "sended_moment")
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     @JsonFormat(pattern = "YYYY-MM-dd HH:mm")
-    private Instant sendedMoment = Instant.now();
+    private LocalDateTime sendedMoment = LocalDateTime.now();
 
     @Enumerated(EnumType.STRING)
     @Column(name = "type_of_email")

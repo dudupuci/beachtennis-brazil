@@ -1,11 +1,16 @@
 package br.com.beachtennisbrazil.api.system.javaxmail.templates;
 
-public class RegisterTemplateMapper {
+import br.com.beachtennisbrazil.api.system.javaxmail.interfaces.RegisterTemplateInterface;
 
-    public static String welcomeMessage(String username) {
-        return "Thanks for your registration, welcome system "+username;
+public class RegisterTemplateMapper implements RegisterTemplateInterface {
+
+    @Override
+    public String getSubject() {
+        return "Register subject!";
     }
-    public static String getRegistrationSubject() {
-        return "Registration successfully!";
+
+    @Override
+    public String getTextMessage(String username, String password) {
+        return "Congratulations brother! "+username + " and your password is: "+password;
     }
 }

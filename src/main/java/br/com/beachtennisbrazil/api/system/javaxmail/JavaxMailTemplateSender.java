@@ -1,9 +1,12 @@
 package br.com.beachtennisbrazil.api.system.javaxmail;
 
+import br.com.beachtennisbrazil.api.system.entities.SentEmail;
+import br.com.beachtennisbrazil.api.system.enums.TypeOfEmailSent;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.cglib.core.Local;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -11,6 +14,8 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Properties;
 
 @AllArgsConstructor
@@ -24,7 +29,8 @@ public class JavaxMailTemplateSender {
     private String host;
     private String port;
 
-    public static void configuration(String to, String from, String subject, String body) {
+    public static SentEmail configuration(String to, String from, String subject, String body) {
+        SentEmail sentEmail = new SentEmail();
         JavaxMailTemplateSender mail = new JavaxMailTemplateSender();
         mail.setTo(to);
         mail.setFrom(from);
@@ -39,7 +45,6 @@ public class JavaxMailTemplateSender {
         properties.put("mail.smtp.auth", "true");
 
         Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
-
             protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
                 return new javax.mail.PasswordAuthentication("dudupucinelli@gmail.com", "4G0XNHhmzFdP9WT2");
             }
@@ -56,8 +61,16 @@ public class JavaxMailTemplateSender {
             System.out.println("sending...");
             Transport.send(message);
             System.out.println("Sent message successfully....");
+            // Adding to db
+            sentEmail.setMessage(body);
+            sentEmail.setSubject(subject);
+            sentEmail.setTo(to);
+            sentEmail.setFrom(from);
+            sentEmail.setSendedMoment(LocalDateTime.now());
+            sentEmail.setTypeOfEmail(TypeOfEmailSent.REGISTRATION);
         } catch (MessagingException mex) {
             mex.printStackTrace();
         }
+        return sentEmail;
     }
 }

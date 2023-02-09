@@ -10,8 +10,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableWebMvc
 public class ApiApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ApiApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ApiApplication.class, args);
+    }
 }
+
 
