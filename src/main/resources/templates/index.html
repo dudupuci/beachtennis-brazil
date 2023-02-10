@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1"/>
+    <title>Spring Boot Application</title>
+
+
+    <style>
+        h4 {
+        color: red
+        }
+
+
+
+    </style>
+</head>
+<body>
+<h1>All Logins!</h1>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Login</th>
+        <th>Password</th>
+        <th>Email</th>
+    </tr>
+
+    <tr th:each="login : ${logins}">
+        <td th:text="${login.id}"></td>
+        <td th:text="${login.username}"></td>
+        <td th:text="${login.password}"></td>
+        <td th:text="${login.email}"></td>
+    </tr>
+</table>
+
+</body>
+</html>
