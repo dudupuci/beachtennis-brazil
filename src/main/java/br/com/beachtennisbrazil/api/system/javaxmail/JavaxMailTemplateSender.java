@@ -29,8 +29,8 @@ public class JavaxMailTemplateSender {
     private String host;
     private String port;
 
-    public static SentEmail configuration(String to, String from, String subject, String body) {
-        SentEmail sentEmail = new SentEmail();
+    public static void configuration(String to, String from, String subject, String body) {
+        // Alterar o estilo de passar o sent email, este métoodo configuration deve ser padrão para todos os templates
         JavaxMailTemplateSender mail = new JavaxMailTemplateSender();
         mail.setTo(to);
         mail.setFrom(from);
@@ -61,16 +61,8 @@ public class JavaxMailTemplateSender {
             System.out.println("sending...");
             Transport.send(message);
             System.out.println("Sent message successfully....");
-            // Adding to db
-            sentEmail.setMessage(body);
-            sentEmail.setSubject(subject);
-            sentEmail.setTo(to);
-            sentEmail.setFrom(from);
-            sentEmail.setSendedMoment(LocalDateTime.now());
-            sentEmail.setTypeOfEmail(TypeOfEmailSent.REGISTRATION);
         } catch (MessagingException mex) {
             mex.printStackTrace();
         }
-        return sentEmail;
     }
 }

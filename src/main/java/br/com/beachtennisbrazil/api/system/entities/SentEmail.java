@@ -7,8 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.time.Instant;
-import java.time.LocalDate;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -17,13 +16,16 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class SentEmail {
+public class SentEmail implements Serializable {
 
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
+
+    @ManyToOne
+    @JoinColumn(name = "login_id", referencedColumnName = "id")
+    private Login login;
 
     @Column(name = "who_received")
     private String to;

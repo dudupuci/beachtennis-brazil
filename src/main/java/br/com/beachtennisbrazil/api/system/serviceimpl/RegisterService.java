@@ -1,7 +1,9 @@
 package br.com.beachtennisbrazil.api.system.serviceimpl;
 
 import br.com.beachtennisbrazil.api.system.entities.Register;
+import br.com.beachtennisbrazil.api.system.entities.SentEmail;
 import br.com.beachtennisbrazil.api.system.entities.validation.RegisterValidator;
+import br.com.beachtennisbrazil.api.system.enums.TypeOfEmailSent;
 import br.com.beachtennisbrazil.api.system.exceptions.CannotRegisterNewLoginException;
 import br.com.beachtennisbrazil.api.system.exceptions.UsernameAlreadyExistsException;
 import br.com.beachtennisbrazil.api.system.javaxmail.JavaxMailTemplateSender;
@@ -12,6 +14,7 @@ import br.com.beachtennisbrazil.api.system.service.RegistrationInterface;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.time.LocalDateTime;
 
 @Service
 @AllArgsConstructor
@@ -22,6 +25,8 @@ public class RegisterService implements RegistrationInterface {
 
     @Autowired
     private SentEmailsRepository emailsRepository;
+
+    private final String DEFAULT_SENDER = "dudupucinelli@gmail.com";
 
 
     @Override
@@ -48,14 +53,23 @@ public class RegisterService implements RegistrationInterface {
             repository.save(login);
 
             RegisterTemplateMapper template = new RegisterTemplateMapper();
+            SentEmail addressing = new SentEmail();
 
-            var sentEmail = JavaxMailTemplateSender.configuration(
+            JavaxMailTemplateSender.configuration(
                     register.getEmail(),
-                    "dudupucinelli@gmail.com",
+                    DEFAULT_SENDER,
                     template.getSubject(),
                     template.getTextMessage(register.getUsername(), register.getPassword()));
 
-            emailsRepository.save(sentEmail);
+            addressing.setFrom(DEFAULT_SENDER);
+            addressing.setTo(register.getEmail());
+            addressing.setSubject(template.getSubject());
+            addressing.setMessage(template.getTextMessage(register.getUsername(), register.getPassword()));
+            addressing.setSendedMoment(LocalDateTime.now());
+            addressing.setTypeOfEmail(TypeOfEmailSent.REGISTRATION);
+            addressing.setLogin(login);
+            emailsRepository.save(addressing);
+
             return register;
         } else {
             throw new UsernameAlreadyExistsException("Login username is already on database!");
