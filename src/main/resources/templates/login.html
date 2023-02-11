@@ -13,12 +13,41 @@
             crossorigin="anonymous"></script>
     <link th:href="@{/login.css}" rel="stylesheet">
 
+    <style>
+        .form-floating {
+  box-sizing: border-box;
+  width: 30%;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.login-form {
+ margin-top: 300px;
+}
+
+.btn-primary {
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:20px;
+  text-align:center;
+  display:block;
+  padding:10px
+}
+
+body {
+ background: url('https://m.media-amazon.com/images/I/81LCUTPIaeL._AC_SL1500_.jpg') no-repeat center center fixed;
+ background-size: cover;
+}
+
+    </style>
+
 </head>
 <body>
 
-<form class="login-form" th:action="@{/login}" method="post">
+<form class="login-form" th:action="@{/home}" role="form" method="post">
     <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="username">
+        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="username"
+               autofocus="autofocus">
         <label for="floatingInput">Username</label>
     </div>
     <div class="form-floating">

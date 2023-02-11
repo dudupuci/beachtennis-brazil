@@ -1,33 +1,58 @@
 package br.com.beachtennisbrazil.api.system.configuration;
 
+import br.com.beachtennisbrazil.api.system.service.LoginInterface;
+import br.com.beachtennisbrazil.api.system.serviceimpl.LoginService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
 //@Configuration
 //@EnableWebSecurity
-public class WebSecurityConfig /*extends WebSecurityConfigurerAdapter*/ {
+public class WebSecurityConfig /*extends WebSecurityConfigurerAdapter */ {
 
-    /*
+/*
+    @Autowired
+    private LoginService service;
+
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.authenticationProvider(authenticationProvider());
+    }
+
+    public DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
+        auth.setUserDetailsService(service);
+        auth.setPasswordEncoder(passwordEncoder());
+        return auth;
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/css/**").permitAll()
+                .antMatchers("/api/**")
+                .permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/dashboard/login")
-                .defaultSuccessUrl("/index")
                 .permitAll()
                 .and()
                 .logout()
-                .permitAll()
-                .and().csrf().disable(); // we'll enable this in a later blog post
+                .invalidateHttpSession(true)
+                .clearAuthentication(true)
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/login?logout")
+                .permitAll();
     }
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("user").password("{noop}pass").roles("USER");
-    }
-     */
+ */
+
 }
 
 

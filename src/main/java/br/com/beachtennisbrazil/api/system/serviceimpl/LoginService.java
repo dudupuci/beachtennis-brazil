@@ -5,7 +5,6 @@ import br.com.beachtennisbrazil.api.system.dto.LoginDTO;
 import br.com.beachtennisbrazil.api.system.entities.Login;
 import br.com.beachtennisbrazil.api.system.exceptions.CannotFindLoginInDatabaseException;
 import br.com.beachtennisbrazil.api.system.repositories.LoginRepository;
-import br.com.beachtennisbrazil.api.system.repositories.RegisterRepository;
 import br.com.beachtennisbrazil.api.system.service.LoginInterface;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,7 @@ import java.util.UUID;
 
 @Service
 @AllArgsConstructor
-public class LoginService implements LoginInterface {
+public class LoginService implements LoginInterface{
 
     @Autowired
     private LoginRepository repository;
@@ -52,4 +51,12 @@ public class LoginService implements LoginInterface {
     public List<Login> findAllUsernames() {
         return repository.findAll();
     }
+
+    /*
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return null;
+    }
+
+     */
 }
