@@ -22,7 +22,9 @@
 }
 
 .login-form {
- margin-top: 300px;
+ margin-top: 250px;
+ background-color: #000000ba;
+    padding: 100px;
 }
 
 .btn-primary {
@@ -39,22 +41,38 @@ body {
  background-size: cover;
 }
 
+h1 {
+text-align: center;
+margin-bottom:5vh;
+color:white;
+}
+
+.link-secondary {
+text-align:center;
+display: block;
+padding-top:20px;
+color:white;
+}
+
     </style>
 
 </head>
 <body>
-
-<form class="login-form" th:action="@{/home}" role="form" method="post">
-    <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="username"
-               autofocus="autofocus">
-        <label for="floatingInput">Username</label>
-    </div>
-    <div class="form-floating">
-        <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
-        <label for="floatingPassword">Password</label>
-    </div>
-    <button type="submit" class="btn btn-primary">Authenticate</button>
-</form>
+<section>
+    <form class="login-form" th:action="@{/authenticate}" th:object="${login}" role="form" method="POST">
+        <h1>Entrar no sistema</h1>
+        <div class="form-floating mb-3">
+            <input type="text" th:field="*{username}" class="form-control" id="floatingInput" placeholder="name@example.com" name="username"
+                   autofocus="autofocus">
+            <label for="floatingInput">Nome de usuário</label>
+        </div>
+        <div class="form-floating">
+            <input type="password" th:field="*{password}" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+            <label for="floatingPassword">Senha</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Autenticar</button>
+        <a href="#" class="link-secondary">Esqueceu sua senha?</a>
+    </form>
+</section>
 </body>
 </html>
