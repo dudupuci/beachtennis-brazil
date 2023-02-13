@@ -18,7 +18,7 @@ public class WebController {
     private LoginService service;
 
 
-    @GetMapping(value = "/home")
+    @GetMapping
     public String acessHome() {
         return "home";
     }

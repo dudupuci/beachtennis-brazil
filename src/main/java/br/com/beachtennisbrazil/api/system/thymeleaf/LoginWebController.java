@@ -44,4 +44,12 @@ public class LoginWebController {
         mav.addObject("logins", list);
         return mav;
     }
+
+    @GetMapping(value = "/home")
+    public ModelAndView getAllLoginsHome() {
+        ModelAndView mav = new ModelAndView("home");
+        List<Login> list = service.findAllUsernames();
+        mav.addObject("logins", list);
+        return mav;
+    }
 }
