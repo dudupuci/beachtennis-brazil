@@ -26,7 +26,7 @@ public class SentEmail implements Serializable {
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "login_id", referencedColumnName = "id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Login login;
