@@ -48,4 +48,10 @@ public class LoginController {
         return ResponseEntity.noContent().build();
     }
 
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> deleteById(@PathVariable("id") UUID id) {
+        service.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }

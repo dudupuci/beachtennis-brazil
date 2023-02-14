@@ -34,6 +34,5 @@ public class Login {
                 .email(this.email)
                 .build();
     }
-
 }
 

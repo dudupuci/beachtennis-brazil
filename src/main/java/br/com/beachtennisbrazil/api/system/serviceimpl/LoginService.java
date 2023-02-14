@@ -48,6 +48,11 @@ public class LoginService implements LoginInterface{
     }
 
     @Override
+    public void deleteById(UUID id) {
+        repository.deleteById(id);
+    }
+
+    @Override
     public List<Login> findAllUsernames() {
         return repository.findAll();
     }

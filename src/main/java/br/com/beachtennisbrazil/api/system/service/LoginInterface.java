@@ -13,6 +13,7 @@ public interface LoginInterface {
     Login recoveryPassword(String email);
 
     void deleteLogins();
+    void deleteById(UUID id);
 
     List<Login> findAllUsernames();
 }

@@ -1,803 +1,599 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>CodePen - bootstrap sidebar</title>
-    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
-    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
-    <link rel="stylesheet" href="./style.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beautiful Dashboard Sidebar Menu Template Example</title>
+    <link href="https://www.cssscript.com/demo/sticky.css" rel="stylesheet" type="text/css">
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
 
-    <style>
-          body {
-  margin-top: 50px;
-  background-color: #fff;
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-  letter-spacing: 0.01em;
-  color: #39464e;
-}
-
-.navbar-default {
-  background-color: #FFF;
-  margin-left: 200px;
-}
-
-/*main side bar*/
-.msb {
-  width: 200px;
-  background-color: #F5F7F9;
-  position: fixed;
-  left: 0;
-  top: 0;
-  right: auto;
-  min-height: 100%;
-  overflow-y: auto;
-  white-space: nowrap;
-  height: 100%;
-  z-index: 1;
-  border-right: 1px solid #ddd;
-}
-.msb .navbar {
-  border: none;
-  margin-left: 0;
-  background-color: inherit;
-}
-.msb .navbar-header {
-  width: 100%;
-  border-bottom: 1px solid #e7e7e7;
-  margin-bottom: 20px;
-  background: #fff;
-}
-.msb .navbar-nav .panel {
-  border: 0 none;
-  box-shadow: none;
-  margin: 0;
-  background: inherit;
-}
-.msb .navbar-nav li {
-  display: block;
-  width: 100%;
-}
-.msb .navbar-nav li a {
-  padding: 15px;
-  color: #5f5f5f;
-}
-.msb .navbar-nav li a .glyphicon, .msb .navbar-nav li a .fa {
-  margin-right: 8px;
-}
-.msb .nb {
-  padding-top: 5px;
-  padding-left: 10px;
-  margin-bottom: 30px;
-  overflow: hidden;
-}
-
-ul.nv,
-ul.ns {
-  position: relative;
+*,
+*::before,
+*::after {
   padding: 0;
-  list-style: none;
-}
-
-.nv {
-  /*ns: nav-sub*/
-}
-.nv li {
-  display: block;
-  position: relative;
-}
-.nv li::before {
-  clear: both;
-  content: "";
-  display: table;
-}
-.nv li a {
-  color: #444;
-  padding: 10px 25px;
-  display: block;
-  vertical-align: middle;
-}
-.nv li a .ic {
-  font-size: 16px;
-  margin-right: 5px;
-  font-weight: 300;
-  display: inline-block;
-}
-.nv .ns li a {
-  padding: 10px 50px;
-}
-
-/*main content wrapper*/
-.mcw {
-  margin-left: 200px;
-  position: relative;
-  min-height: 100%;
-  /*content view*/
-}
-/*globals*/
-a,
-a:focus,
-a:hover {
-  text-decoration: none;
-}
-
-.inbox .container-fluid {
-  padding-left: 0;
-  padding-right: 0;
-}
-.inbox ul, .inbox li {
   margin: 0;
-  padding: 0;
-}
-.inbox ul li {
-  list-style: none;
-}
-.inbox ul li a {
-  display: block;
-  padding: 10px 20px;
+  box-sizing: border-box;
 }
 
-.msb, .mnb {
-  -moz-animation: slidein 300ms forwards;
-  -o-animation: slidein 300ms forwards;
-  -webkit-animation: slidein 300ms forwards;
-  animation: slidein 300ms forwards;
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-}
-
-.mcw {
-  -moz-animation: bodyslidein 300ms forwards;
-  -o-animation: bodyslidein 300ms forwards;
-  -webkit-animation: bodyslidein 300ms forwards;
-  animation: bodyslidein 300ms forwards;
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-}
-
-body.msb-x .mcw, body.msb-x .mnb {
-  margin-left: 0;
-  -moz-animation: bodyslideout 300ms forwards;
-  -o-animation: bodyslideout 300ms forwards;
-  -webkit-animation: bodyslideout 300ms forwards;
-  animation: bodyslideout 300ms forwards;
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-}
-body.msb-x .msb {
-  -moz-animation: slideout 300ms forwards;
-  -o-animation: slideout 300ms forwards;
-  -webkit-animation: slideout 300ms forwards;
-  animation: slideout 300ms forwards;
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-}
-
-/* Slide in animation */
-@-moz-keyframes slidein {
-  0% {
-    left: -200px;
-  }
-  100% {
-    left: 0;
-  }
-}
-@-webkit-keyframes slidein {
-  0% {
-    left: -200px;
-  }
-  100% {
-    left: 0;
-  }
-}
-@keyframes slidein {
-  0% {
-    left: -200px;
-  }
-  100% {
-    left: 0;
-  }
-}
-@-moz-keyframes slideout {
-  0% {
-    left: 0;
-  }
-  100% {
-    left: -200px;
-  }
-}
-@-webkit-keyframes slideout {
-  0% {
-    left: 0;
-  }
-  100% {
-    left: -200px;
-  }
-}
-@keyframes slideout {
-  0% {
-    left: 0;
-  }
-  100% {
-    left: -200px;
-  }
-}
-@-moz-keyframes bodyslidein {
-  0% {
-    left: 0;
-  }
-  100% {
-    margin-left: 200px;
-  }
-}
-@-webkit-keyframes bodyslidein {
-  0% {
-    left: 0;
-  }
-  100% {
-    left: 0;
-  }
-}
-@keyframes bodyslidein {
-  0% {
-    margin-left: 0;
-  }
-  100% {
-    margin-left: 200px;
-  }
-}
-@-moz-keyframes bodyslideout {
-  0% {
-    margin-left: 200px;
-  }
-  100% {
-    margin-right: 0;
-  }
-}
-@-webkit-keyframes bodyslideout {
-  0% {
-    margin-left: 200px;
-  }
-  100% {
-    margin-left: 0;
-  }
-}
-@keyframes bodyslideout {
-  0% {
-    margin-left: 200px;
-  }
-  100% {
-    margin-left: 0;
-  }
+:root {
+  --main-color: #3d5af1;
+  --main-color-dark: #3651d4;
+  --main-color-light: #5872f5;
+  --text-color: #cfcde7;
 }
 
 body {
-  margin-top: 50px;
-  background-color: #fff;
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-  letter-spacing: 0.01em;
-  color: #39464e;
-}
-
-.navbar-default {
-  background-color: #FFF;
-  margin-left: 200px;
-}
-
-/*main side bar*/
-.msb {
-  width: 200px;
-  background-color: #F5F7F9;
-  position: fixed;
-  left: 0;
-  top: 0;
-  right: auto;
-  min-height: 100%;
-  overflow-y: auto;
-  white-space: nowrap;
-  height: 100%;
-  z-index: 1;
-  border-right: 1px solid #ddd;
-  .navbar {
-    border: none;
-    margin-left: 0;
-    background-color: inherit;
-  }
-  .navbar-header {
-    width: 100%;
-    border-bottom: 1px solid #e7e7e7;
-    margin-bottom: 20px;
-    background: #fff;
-  }
-  .navbar-nav {
-    .panel {
-      border: 0 none;
-      box-shadow: none;
-      margin: 0;
-      background: inherit;
-    }
-    li {
-      display: block;
-      width: 100%;
-      a {
-        padding: 15px;
-        color: #5f5f5f;
-        .glyphicon, .fa {
-          margin-right: 8px;
-        }
-      }
-    }
-  }
-  .nb {
-    padding-top: 5px;
-    padding-left: 10px;
-    margin-bottom: 30px;
-    overflow: hidden;
-
-  }
-}
-ul.nv,
-ul.ns {
+  font-family: "Poppins", sans-serif;
+  overflow-x: hidden;
+  background-color: #e4e2f5;
+  min-height: 100vh;
+  display: flex;
   position: relative;
-  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
   list-style: none;
 }
-.nv {
-  li {
-    display: block;
-    position: relative;
 
-    &::before {
-      clear: both;
-      content: "";
-      display: table;
-    }
-    a {
-      color: #444;
-      padding: 10px 25px;
-      display: block;
-      vertical-align: middle;
-
-      .ic {
-        font-size: 16px;
-        margin-right: 5px;
-        font-weight: 300;
-        display: inline-block;
-      }
-    }
-  }
-  /*ns: nav-sub*/
-  .ns {
-    li {
-      a {
-        padding: 10px 50px;
-      }
-    }
-
-  }
-
+nav {
+  position: sticky;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  background-color: var(--main-color);
+  width: 16rem;
+  padding: 1.8rem 0.85rem;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  transition: width 0.5s ease-in-out;
 }
 
+nav::before {
+  content: "";
+  position: absolute;
+  width: 2rem;
+  height: 100%;
+  top: 0;
+  left: 100%;
+}
 
-/*main content wrapper*/
-.mcw {
-  margin-left: 200px;
+main {
+  flex: 1;
+  padding: 2rem;
+  color: #1f2027;
+  display: flex;
+  flex-direction: column;
+}
+
+main h1 {
+  margin-bottom: 1rem;
+}
+
+main .copyright {
+  margin-top: auto;
+  font-size: 0.9rem;
+}
+
+main .copyright span {
+  color: var(--main-color);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.sidebar-top {
   position: relative;
-  min-height: 100%;
-
-  /*content view*/
-  .cv {
-  }
+  display: flex;
+  align-items: center;
 }
 
-
-/*globals*/
-a,
-a:focus,
-a:hover {
- text-decoration: none;
+.sidebar-top .logo {
+  width: 2.2rem;
+  height:28px;
+  margin: 0 0.8rem;
 }
 
-.inbox {
-  .container-fluid {
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  ul, li {
-    margin: 0;
-    padding: 0;
-  }
-  ul {
-    li {
-      list-style: none;
-      a {
-        display: block;
-        padding: 10px 20px;
-      }
-    }
-  }
-}
-.msb, .mnb {
-    -moz-animation: slidein 300ms forwards;
-    -o-animation: slidein 300ms forwards;
-    -webkit-animation: slidein 300ms forwards;
-    animation: slidein 300ms forwards;
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
-}
-.mcw {
-    -moz-animation: bodyslidein 300ms forwards;
-    -o-animation: bodyslidein 300ms forwards;
-    -webkit-animation: bodyslidein 300ms forwards;
-    animation: bodyslidein 300ms forwards;
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
-}
-body.msb-x {
-
-  .mcw, .mnb {
-    margin-left: 0;
--moz-animation: bodyslideout 300ms forwards;
-    -o-animation: bodyslideout 300ms forwards;
-    -webkit-animation: bodyslideout 300ms forwards;
-    animation: bodyslideout 300ms forwards;
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
-  }
-  .msb {
-    -moz-animation: slideout 300ms forwards;
-    -o-animation: slideout 300ms forwards;
-    -webkit-animation: slideout 300ms forwards;
-    animation: slideout 300ms forwards;
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
-  }
+.sidebar-top h3 {
+  padding-left: 0.5rem;
+  font-weight: 600;
+  font-size: 1.15rem;
 }
 
-  /* Slide in animation */
-  @-moz-keyframes slidein {
-    0% {
-      left: -200px;
-    }
-    100% {
-      left: 0;
-    }
-  }
-  @-webkit-keyframes slidein {
-    0% {
-      left: -200px;
-    }
-    100% {
-      left: 0;
-    }
-  }
-  @keyframes slidein {
-    0% {
-      left: -200px;
-    }
-    100% {
-      left: 0;
-    }
-  }
-  @-moz-keyframes slideout {
-    0% {
-      left: 0;
-    }
-    100% {
-      left: -200px;
-    }
-  }
-  @-webkit-keyframes slideout {
-    0% {
-      left: 0;
-    }
-    100% {
-      left: -200px;
-    }
-  }
-  @keyframes slideout {
-    0% {
-      left: 0;
-    }
-    100% {
-      left: -200px;
-    }
-  }
+.shrink-btn {
+  position: absolute;
+  top: 50%;
+  height: 27px;
+  padding: 0 0.3rem;
+  background-color: var(--main-color);
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 3px 10px -3px rgba(70, 46, 118, 0.3);
+  right: -2.65rem;
+  transform: translateY(-50%) translateX(-8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s;
+}
 
-  @-moz-keyframes bodyslidein {
-    0% {
-      left: 0;
-    }
-    100% {
-      margin-left: 200px;
-    }
-  }
-  @-webkit-keyframes bodyslidein {
-    0% {
-      left: 0;
-    }
-    100% {
-      left:0
-    }
-  }
-  @keyframes bodyslidein {
-    0% {
-      margin-left: 0;
-    }
-    100% {
-      margin-left: 200px;
-    }
-  }
-  @-moz-keyframes bodyslideout {
-    0% {
-      margin-left: 200px;
-    }
-    100% {
-      margin-right: 0;
-    }
-  }
-  @-webkit-keyframes bodyslideout {
-    0% {
-      margin-left: 200px;
-    }
-    100% {
-      margin-left: 0;
-    }
-  }
-  @keyframes bodyslideout {
-    0% {
-      margin-left: 200px;
-    }
-    100% {
-      margin-left: 0;
-    }
-  }
+.shrink-btn i {
+  line-height: 27px;
+  transition: 0.3s;
+}
 
+.shrink-btn:hover {
+  background-color: var(--main-color-dark);
+}
 
-    </style>
-</head>
+nav:hover .shrink-btn,
+.shrink-btn.hovered {
+  transform: translateY(-50%) translateX(0px);
+  opacity: 1;
+  pointer-events: all;
+}
+
+.search {
+  min-height: 2.7rem;
+  background-color: var(--main-color-light);
+  margin: 2rem 0.5rem 1.7rem;
+  display: grid;
+  grid-template-columns: 2.7rem 1fr;
+  align-items: center;
+  text-align: center;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.search input {
+  height: 100%;
+  border: none;
+  background: none;
+  outline: none;
+  color: #fff;
+  caret-color: #fff;
+  font-family: inherit;
+}
+
+.search input::placeholder {
+  color: var(--text-color);
+}
+
+.sidebar-links ul {
+  position: relative;
+}
+
+.sidebar-links li {
+  position: relative;
+  padding: 2.5px 0;
+}
+
+.sidebar-links a {
+  color: var(--text-color);
+  font-weight: 400;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  height: 53px;
+}
+
+.icon {
+  font-size: 1.3rem;
+  text-align: center;
+  min-width: 3.7rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+}
+
+.icon i {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+  transition: 0.3s;
+}
+
+.icon i:last-child {
+  opacity: 0;
+  color: #fff;
+}
+
+.sidebar-links a.active,
+.sidebar-links a:hover {
+  color: #fff;
+}
+
+.sidebar-links a .link {
+  transition: opacity 0.3s 0.2s, color 0.3s;
+}
+
+.sidebar-links a.active i:first-child {
+  opacity: 0;
+}
+
+.sidebar-links a.active i:last-child {
+  opacity: 1;
+}
+
+.active-tab {
+  width: 100%;
+  height: 53px;
+  background-color: var(--main-color-dark);
+  border-radius: 10px;
+  position: absolute;
+  top: 2.5px;
+  left: 0;
+  transition: top 0.3s;
+}
+
+.sidebar-links h4 {
+  position: relative;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 0 0.8rem;
+  color: var(--text-color);
+  letter-spacing: 0.5px;
+  height: 45px;
+  line-height: 45px;
+  transition: opacity 0.3s 0.2s, height 0.5s 0s;
+}
+
+.sidebar-footer {
+  position: relative;
+  margin-top: auto;
+}
+
+.account {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  color: var(--text-color);
+  height: 53px;
+  width: 3.7rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s 0s, color 0.3s 0s;
+}
+
+.account:hover {
+  color: #fff;
+}
+
+.admin-user {
+  display: flex;
+  align-items: center;
+}
+
+.admin-profile {
+  white-space: nowrap;
+  max-width: 100%;
+  transition: opacity 0.3s 0.2s, max-width 0.7s 0s ease-in-out;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  overflow: hidden;
+}
+
+.admin-user img {
+  width: 2.9rem;
+  border-radius: 50%;
+  margin: 0 0.4rem;
+}
+
+.admin-info {
+  padding-left: 0.3rem;
+}
+
+.admin-info h3 {
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.admin-info h5 {
+  font-weight: 400;
+  font-size: 0.75rem;
+  color: var(--text-color);
+  margin-top: 0.3rem;
+  line-height: 1;
+}
+
+.log-out {
+  display: flex;
+  height: 40px;
+  min-width: 2.4rem;
+  background-color: var(--main-color-dark);
+  color: var(--text-color);
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  border-radius: 10px;
+  margin: 0 0.65rem;
+  transition: color 0.3s;
+}
+
+.log-out:hover {
+  color: #fff;
+}
+
+.tooltip {
+  background-color: var(--main-color);
+  position: absolute;
+  right: -1.2rem;
+  top: 0;
+  transform: translateX(100%) translateY(-50%);
+  padding: 0 0.8rem;
+  font-size: 0.85rem;
+  display: none;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr;
+  height: 30px;
+  align-items: center;
+  border-radius: 7px;
+  box-shadow: 0 3px 10px -3px rgba(70, 46, 118, 0.3);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.tooltip span {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+  opacity: 0;
+  transition: 0.3s;
+}
+
+.tooltip span.show {
+  opacity: 1;
+}
+
+.tooltip-element:hover ~ .tooltip {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* When the menu shrinks */
+
+.hide {
+  transition: opacity 0.3s 0.2s;
+}
+
+body.shrink nav {
+  width: 5.4rem;
+}
+
+body.shrink .hide {
+  opacity: 0;
+  pointer-events: none;
+  transition-delay: 0s;
+}
+
+body.shrink .shrink-btn i {
+  transform: rotate(-180deg);
+}
+
+body.shrink .sidebar-links h4 {
+  height: 10px;
+}
+
+body.shrink .account {
+  opacity: 1;
+  pointer-events: all;
+  transition: opacity 0.3s 0.3s, color 0.3s 0s;
+}
+
+body.shrink .admin-profile {
+  max-width: 0;
+  transition: opacity 0.3s 0s, max-width 0.7s 0s ease-in-out;
+}
+
+body.shrink .tooltip {
+  display: grid;
+}
+</style>
+
 <body>
-<!-- partial:index.partial.html -->
-<nav class="mnb navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <i class="ic fa fa-bars"></i>
-            </button>
-            <div style="padding: 15px 0;">
-                <a href="#" id="msbo" onclick="(function() {
-  document.querySelector('#msbo').addEventListener('click', function(){
-    document.querySelector('body').classList.toggle('msb-x');
+<nav>
+    <script rel="text/javascript">
+        (function($) {
+
+	"use strict";
+
+	var fullHeight = function() {
+		$('.js-fullheight').css('height', $(window).height());
+		$(window).resize(function(){
+			$('.js-fullheight').css('height', $(window).height());
+		});
+
+	};
+	fullHeight();
+
+	$('#.shrink-btn').on('click', function () {
+      $('#sidebar').toggleClass('active');
   });
-}());"><i class="ic fa fa-bars"></i></a>
+
+})(jQuery);
+
+    </script>
+    <div class="sidebar-top">
+      <span class="shrink-btn">
+        <i class='bx bx-chevron-left'></i>
+      </span>
+        <img src="https://i.postimg.cc/d0mt0sYk/logo-removebg-preview.png" class="logo" alt="">
+        <h3 class="hide" style="text-align:center;">BT Brazil v1.0.0</h3>
+    </div>
+
+    <div class="search">
+        <i class='bx bx-search'></i>
+        <input type="text" class="hide" placeholder="Quick Search ...">
+    </div>
+
+    <div class="sidebar-links">
+        <ul>
+            <div class="active-tab"></div>
+            <li class="tooltip-element" data-tooltip="0">
+                <a href="#" class="active" data-active="0">
+                    <div class="icon">
+                        <i class='bx bx-tachometer'></i>
+                        <i class='bx bxs-tachometer'></i>
+                    </div>
+                    <span class="link hide">Dashboard</span>
+                </a>
+            </li>
+            <li class="tooltip-element" data-tooltip="1">
+                <a href="#" data-active="1">
+                    <div class="icon">
+                        <i class='bx bx-folder'></i>
+                        <i class='bx bxs-folder'></i>
+                    </div>
+                    <span class="link hide">Projects</span>
+                </a>
+            </li>
+            <li class="tooltip-element" data-tooltip="2">
+                <a href="#" data-active="2">
+                    <div class="icon">
+                        <i class='bx bx-message-square-detail'></i>
+                        <i class='bx bxs-message-square-detail'></i>
+                    </div>
+                    <span class="link hide">Messages</span>
+                </a>
+            </li>
+            <li class="tooltip-element" data-tooltip="3">
+                <a href="#" data-active="3">
+                    <div class="icon">
+                        <i class='bx bx-bar-chart-square'></i>
+                        <i class='bx bxs-bar-chart-square'></i>
+                    </div>
+                    <span class="link hide">Analytics</span>
+                </a>
+            </li>
+            <div class="tooltip">
+                <span class="show">Dashboard</span>
+                <span>Projects</span>
+                <span>Messages</span>
+                <span>Analytics</span>
             </div>
+        </ul>
+
+        <h4 class="hide">Shortcuts</h4>
+
+        <ul>
+            <li class="tooltip-element" data-tooltip="0">
+                <a href="#" data-active="4">
+                    <div class="icon">
+                        <i class='bx bx-notepad'></i>
+                        <i class='bx bxs-notepad'></i>
+                    </div>
+                    <span class="link hide">Tasks</span>
+                </a>
+            </li>
+            <li class="tooltip-element" data-tooltip="1">
+                <a href="#" data-active="5">
+                    <div class="icon">
+                        <i class='bx bx-help-circle'></i>
+                        <i class='bx bxs-help-circle'></i>
+                    </div>
+                    <span class="link hide">Help</span>
+                </a>
+            </li>
+            <li class="tooltip-element" data-tooltip="2">
+                <a href="#" data-active="6">
+                    <div class="icon">
+                        <i class='bx bx-cog'></i>
+                        <i class='bx bxs-cog'></i>
+                    </div>
+                    <span class="link hide">Settings</span>
+                </a>
+            </li>
+            <div class="tooltip">
+                <span class="show">Tasks</span>
+                <span>Help</span>
+                <span>Settings</span>
+            </div>
+        </ul>
+    </div>
+
+    <div class="sidebar-footer">
+        <a href="#" class="account tooltip-element" data-tooltip="0">
+            <i class='bx bx-user'></i>
+        </a>
+        <div class="admin-user tooltip-element" data-tooltip="1">
+            <div class="admin-profile hide">
+                <img src="./img/face-1.png" alt="">
+                <div class="admin-info">
+                    <h3>John Doe</h3>
+                    <h5>Admin</h5>
+                </div>
+            </div>
+            <a href="#" class="log-out">
+                <i class='bx bx-log-out'></i>
+            </a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">En</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">Draude Oba <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Settings</a></li>
-                        <li><a href="#">Upgrade</a></li>
-                        <li><a href="#">Help</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">Logout</a></li>
-                    </ul>
-                </li>
-                <li><a href="#"><i class="fa fa-bell-o"></i></a></li>
-                <li><a href="#"><i class="fa fa-comment-o"></i></a></li>
-            </ul>
-            <form class="navbar-form navbar-right">
-                <input type="text" class="form-control" placeholder="Search...">
-            </form>
+        <div class="tooltip">
+            <span class="show">John Doe</span>
+            <span>Logout</span>
         </div>
     </div>
 </nav>
-<!--msb: main sidebar-->
-<div class="msb" id="msb">
-    <nav class="navbar navbar-default" role="navigation">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <div class="brand-wrapper">
-                <!-- Brand -->
-                <div class="brand-name-wrapper">
-                    <a class="navbar-brand" href="#">
-                        BT Brazil v1.0.0
-                    </a>
-                </div>
 
-            </div>
 
-        </div>
+<main>
+    <h1>Beautiful Dashboard Sidebar Menu Template Example</h1>
+    <div><div id="carbon-block"></div>
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- CSSScript Demo Page -->
+        <ins class="adsbygoogle"
+             style="display:inline-block;width:728px;height:90px"
+             data-ad-client="ca-pub-2783044520727903"
+             data-ad-slot="3025259193"></ins>
+        <script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+    <p class="text">
+        A beautiful, responsive, collapsible sidebar menu (also called offcanvas menu) created for dashboard & admin panel projects.
+    </p>
+    <p class="copyright">
+        &copy; 2021 - <span>Aqumex</span> All Rights Reserved.
+    </p>
+</main>
 
-        <!-- Main Menu -->
-        <div class="side-menu-container">
-            <ul class="nav navbar-nav">
+<script src="app.js"></script>
+<script>
+try {
+  fetch(new Request("https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", { method: 'HEAD', mode: 'no-cors' })).then(function(response) {
+    return true;
+  }).catch(function(e) {
+    var carbonScript = document.createElement("script");
+    carbonScript.src = "//cdn.carbonads.com/carbon.js?serve=CE7DC2JW&placement=wwwcssscriptcom";
+    carbonScript.id = "_carbonads_js";
+    document.getElementById("carbon-block").appendChild(carbonScript);
+  });
+} catch (error) {
+  console.log(error);
+}
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-                <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-                <li class="panel panel-default" id="dropdown">
-                    <a data-toggle="collapse" href="#dropdown-lvl1">
-                        <i class="fa fa-television"></i> Gerenciamento
-                        <span class="caret"></span>
-                    </a>
-                    <!-- Dropdown level 1 -->
-                    <div id="dropdown-lvl1" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <ul class="nav navbar-nav">
-                                <li><a href="#"><i class="fa fa-clock-o"></i>Jogos em tempo real</a></li>
-                                <li><a href="#"><i class="fa fa-building-o"></i>Quadras</a></li>
-                                <li><a href="#"><i class="fa fa-users"></i>Jogadores</a></li>
-                                <li><a href="#"><i class="fa fa-cubes"></i>Emprestáveis</a></li>
-                                <li><a href="#"><i class="fa fa-bell-o"></i>Notificações</a></li>
+  ga('create', 'UA-46156385-1', 'cssscript.com');
+  ga('send', 'pageview');
 
-                                <!-- Dropdown level 2 -->
-                                <li class="panel panel-default" id="dropdown">
-                                    <a data-toggle="collapse" href="#dropdown-lvl2">
-                                        <i class="fa fa-info"></i> Outros <span class="caret"></span>
-                                    </a>
-                                    <div id="dropdown-lvl2" class="panel-collapse collapse">
-                                        <div class="panel-body">
-                                            <ul class="nav navbar-nav">
-                                                <li><a href="#"><i class="fa fa-money"></i>Pagamentos</a></li>
-                                                <li><a href="#"><i class="fa fa-exclamation-circle"></i>Multas</a></li>
-                                                <li><a href="#"><i class="fa  fa-line-chart"></i>Estatísticas</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
-                <li><a href="#"><i class="fa fa-trophy"></i> Torneios</a></li>
-
-                <!-- Dropdown-->
-                <li class="panel panel-default" id="dropdown">
-                    <a data-toggle="collapse" href="#dropdown-lvl1">
-                        <i class="fa fa-diamond"></i> Serviços
-                        <span class="caret"></span>
-                    </a>
-                    <!-- Dropdown level 1 -->
-                    <div id="dropdown-lvl" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <ul class="nav navbar-nav">
-                                <li><a href="#">Mail</a></li>
-                                <li><a href="#">Calendar</a></li>
-                                <li><a href="#">Ecommerce</a></li>
-                                <li><a href="#">User</a></li>
-                                <li><a href="#">Social</a></li>
-
-                                <!-- Dropdown level 2 -->
-                                <li class="panel panel-default" id="dropdown">
-                                    <a data-toggle="collapse" href="#dropdown-lvl2">
-                                        <i class="fa fa-info"></i> Sub Level <span class="caret"></span>
-                                    </a>
-                                    <div id="dropdown-lvl2" class="panel-collapse collapse">
-                                        <div class="panel-body">
-                                            <ul class="nav navbar-nav">
-                                                <li><a href="#">Link</a></li>
-                                                <li><a href="#">Link</a></li>
-                                                <li><a href="#">Link</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
-                <li><a href="#"><span class="glyphicon glyphicon-signal"></span> Gráficos</a></li>
-            </ul>
-        </div><!-- /.navbar-collapse -->
-    </nav>
-</div>
-<!--main content wrapper-->
-<div class="mcw">
-    <!--navigation here-->
-    <!--main content view-->
-    <div class="cv">
-        <div>
-            <div class="inbox">
-                <div class="inbox-sb">
-
-                </div>
-                <div class="inbox-bx container-fluid">
-                    <div class="row">
-                        <div class="col-md-2">
-                            <ul>
-                                <li><a href="#">Inbox</a></li>
-                                <li><a href="#">Sent</a></li>
-                                <li><a href="#">Trash</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-md-10">
-                            <table class="table table-stripped">
-                                <tbody>
-                                <tr>
-                                    <td><input type="checkbox"/></td>
-                                    <td><i class="fa fa-star"></i></td>
-                                    <td><b>Mozilla</b></td>
-                                    <td><b>In celebration of women and girls everywhere</b></td>
-                                    <td></td>
-                                    <td>Mar 10</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox"/></td>
-                                    <td><i class="fa fa-star-o"></i></td>
-                                    <td>Dan Glenn</td>
-                                    <td>[ptcuser-announcements] - PTC/USER Expert Speaker Series Webinar March 9, 2017
-                                        11AM (EST)
-                                    </td>
-                                    <td><i class="fa fa-paperclip"></i></td>
-                                    <td>Mar 10</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox"/></td>
-                                    <td><i class="fa fa-star-o"></i></td>
-                                    <td>Jetpack</td>
-                                    <td>Announcing some highly requested improvements and our new affiliate program</td>
-                                    <td></td>
-                                    <td>Mar 08</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox"/></td>
-                                    <td><i class="fa fa-star-o"></i></td>
-                                    <td>Jetpack</td>
-                                    <td>Announcing some highly requested improvements and our new affiliate program</td>
-                                    <td></td>
-                                    <td>Mar 08</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox"/></td>
-                                    <td><i class="fa fa-star-o"></i></td>
-                                    <td>Jetpack</td>
-                                    <td>Announcing some highly requested improvements and our new affiliate program</td>
-                                    <td></td>
-                                    <td>Mar 08</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox"/></td>
-                                    <td><i class="fa fa-star-o"></i></td>
-                                    <td>Jetpack</td>
-                                    <td>Announcing some highly requested improvements and our new affiliate program</td>
-                                    <td></td>
-                                    <td>Mar 08</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox"/></td>
-                                    <td><i class="fa fa-star-o"></i></td>
-                                    <td>Jetpack</td>
-                                    <td>Announcing some highly requested improvements and our new affiliate program</td>
-                                    <td></td>
-                                    <td>Mar 08</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox"/></td>
-                                    <td><i class="fa fa-star-o"></i></td>
-                                    <td>Jetpack</td>
-                                    <td>Announcing some highly requested improvements and our new affiliate program</td>
-                                    <td></td>
-                                    <td>Mar 08</td>
-                                </tr>
-
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- partial -->
+</script>
 <script src='https://code.jquery.com/jquery-3.1.1.min.js'></script>
-<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
-
 </body>
+
 </html>
