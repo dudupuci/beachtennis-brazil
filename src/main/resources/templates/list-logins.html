@@ -24,11 +24,11 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="login: ${logins}">
-        <td th:text="${login.id}"></td>
-        <td th:text="${login.username}"></td>
-        <td th:text="${login.password}"></td>
-        <td th:text="${login.email}"></td>
+    <tr th:each="court: ${courts}">
+        <td th:text="${court.id}"></td>
+        <td th:text="${court.gameDate}"></td>
+        <td th:text="${court.typeOfGame}"></td>
+        <td th:text="${court.endTime}"></td>
     </tr>
     </tbody>
 </table>

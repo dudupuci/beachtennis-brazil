@@ -16,7 +16,7 @@ public class RegisterWebController {
     @Autowired
     private RegisterService service;
 
-    @GetMapping("system/register")
+    @GetMapping("dashboard/register")
     public ModelAndView addRegisterForm() {
         ModelAndView mav = new ModelAndView("register");
         Register register = new Register();

@@ -23,7 +23,7 @@ public class LoginWebController {
     @Autowired
     private LoginService service;
 
-    @GetMapping("system/login")
+    @GetMapping("dashboard/login")
     public ModelAndView tryConnect() {
         ModelAndView mav = new ModelAndView("login");
         Login login = new Login();
