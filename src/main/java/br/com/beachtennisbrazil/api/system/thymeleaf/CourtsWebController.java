@@ -22,23 +22,13 @@ public class CourtsWebController {
     private GameCourtService service;
 
 
-    @GetMapping(value = "live/courts")
-    public ModelAndView getAll() {
+    @GetMapping(value = "/courts")
+    public ModelAndView getAllLogins() {
         ModelAndView mav = new ModelAndView("courts");
         List<GameCourt> list = service.findAll();
-        mav.addObject("court", list);
+        mav.addObject("courts", list);
         return mav;
     }
 
-    /*
-        <tr th:each="login: ${logins}">
-        <td th:text="${login.id}"></td>
-        <td th:text="${login.username}"></td>
-        <td th:text="${login.password}"></td>
-        <td th:text="${login.email}"></td>
-    </tr>
-    </tbody>
-</table>
 
-     */
 }

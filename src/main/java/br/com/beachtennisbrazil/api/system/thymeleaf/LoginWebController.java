@@ -37,14 +37,6 @@ public class LoginWebController {
         return "redirect:/home";
     }
 
-    @GetMapping(value = "/list-logins")
-    public ModelAndView getAllLogins() {
-        ModelAndView mav = new ModelAndView("list-logins");
-        List<Login> list = service.findAllUsernames();
-        mav.addObject("logins", list);
-        return mav;
-    }
-
     @GetMapping(value = "/home")
     public ModelAndView getAllLoginsHome() {
         ModelAndView mav = new ModelAndView("home");

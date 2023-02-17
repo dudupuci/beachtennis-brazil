@@ -15,6 +15,8 @@ public class GameCourtValidator implements GameCourtValidatorInterface {
             throw new CannotCreateGameCourtException(
                     "Please, check the fields: Players count: " + gameCourt.getPlayers().size()
                             + " and hours: " + gameCourt.getContractedHours());
+
+
         } else {
             return true;
         }
