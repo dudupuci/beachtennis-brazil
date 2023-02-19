@@ -4,9 +4,15 @@ import br.com.beachtennisbrazil.api.app.entities.GameCourt;
 import br.com.beachtennisbrazil.api.app.entities.Loanable;
 import br.com.beachtennisbrazil.api.app.entities.Player;
 import br.com.beachtennisbrazil.api.app.enums.TypeOfGame;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -18,10 +24,12 @@ import java.util.UUID;
 @AllArgsConstructor
 public class GameCourtDTO {
     private UUID id;
-    private LocalDateTime gameDate = LocalDateTime.now();
-    private Integer startTime;
-    private Integer contractedHours;
-    private Integer endTime;
+    private LocalDate gameDate = LocalDate.now();
+
+    private Timestamp timeConverter = Timestamp.from(Instant.now());
+    private LocalTime startTime;
+    private LocalTime contractedHours;
+    private LocalTime endTime;
     private List<Loanable> loanables = new ArrayList<>();
     private Integer quantityPlayingNow;
     private TypeOfGame typeOfGame;
@@ -31,6 +39,7 @@ public class GameCourtDTO {
         return GameCourt.builder()
                 .id(this.id)
                 .gameDate(this.gameDate)
+                .timeConverter(this.timeConverter)
                 .startTime(this.startTime)
                 .contractedHours(this.contractedHours)
                 .endTime(this.endTime)

@@ -12,9 +12,11 @@ import br.com.beachtennisbrazil.api.app.service.GameCourtServiceInterface;
 import br.com.beachtennisbrazil.api.app.service.PlayerServiceInterface;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import java.time.LocalTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -40,8 +42,8 @@ public class GameCourtService implements GameCourtServiceInterface {
         try {
             GameCourtValidator gameValidator = new GameCourtValidator();
             var validator = gameValidator.validateIfTheGameCanBeCreated(gameCourt);
-            gameCourt.setStartTime(gameCourt.getGameDate().getHour());
-            gameCourt.setEndTime(gameCourt.getStartTime() + gameCourt.getContractedHours());
+            gameCourt.setStartTime(LocalTime.of(gameCourt.getTimeConverter().getHours(), gameCourt.getTimeConverter().getMinutes()));
+            gameCourt.setEndTime(gameCourt.getStartTime().plusHours(gameCourt.getContractedHours().getHour()).plusMinutes(gameCourt.getContractedHours().getMinute()));
 
             if (validator == true) {
                 repository.save(gameCourt);
