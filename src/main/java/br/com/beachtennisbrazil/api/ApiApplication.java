@@ -30,20 +30,6 @@ public class ApiApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ApiApplication.class, args);
-
-        SubscriptionPlan plan = new SubscriptionPlan();
-        Player player = new Player(UUID.randomUUID(), plan, 4030, "Carlinho", "14794524919", "44999543420", LocalDateTime.now());
-
-
-        Map<Integer, String> map = new HashMap<>();
-        map.put(player.getGameCode(), player.getName());
-
-        GameCourt gameCourt = new GameCourt();
-        gameCourt.setGameCodes(map);
-
-        System.out.println(gameCourt.getGameCodes());
-
-
     }
 }
 

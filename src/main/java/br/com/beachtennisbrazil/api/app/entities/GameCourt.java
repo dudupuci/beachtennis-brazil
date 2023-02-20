@@ -24,7 +24,7 @@ import java.util.*;
 @Getter
 @Setter
 @Builder
-@JsonPropertyOrder({"id", "gameDate", "typeOfGame", "startTime", "endTime", "contractedHours", "quantityPlayingNow" })
+@JsonPropertyOrder({"id", "gameDate", "typeOfGame", "startTime", "endTime", "contractedHours", "quantityPlayingNow"})
 public class GameCourt {
 
     @Id
@@ -48,13 +48,19 @@ public class GameCourt {
     @Enumerated(EnumType.STRING)
     private TypeOfGame typeOfGame;
 
-    @Transient
+    @ElementCollection
+    @CollectionTable(name = "player_game_code",
+            joinColumns = {@JoinColumn(name = "game_court_id", referencedColumnName = "id")})
+    @MapKeyColumn(name = "game_code")
+    @Column(name = "player_name")
     private Map<Integer, String> gameCodes = new HashMap<>();
 
     /* Só pode ser iniciado caso seja um jogo simples de 2 pessoas ou duplas, 4 pessoas.
        Só pode ser iniciado caso a quadra seja alocada por um dos jogadores,
         o jogador cadastrado e a quadra paga.
        Pode também ser iniciada caso seja aula, torneio, etc.
+
+       Cada jogador tem um gameCode
      */
 
     public GameCourtDTO toDto() {
