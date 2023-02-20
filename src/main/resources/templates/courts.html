@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beautiful Dashboard Sidebar Menu Template Example</title>
+    <title>DASHBOARD</title>
     <link href="https://www.cssscript.com/demo/sticky.css" rel="stylesheet" type="text/css">
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -257,7 +257,7 @@
                               d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
                     </svg>
 
-                    <span>Adicionar Novo Jogo</span>
+                    <span> Adicionar Novo Jogo</span>
                 </button>
 
 
@@ -286,26 +286,31 @@
                                 <h2 class="text-lg font-semibold text-gray-700 capitalize dark:text-white">
                                     Adicionar novo Jogo</h2>
 
-                                <form th:action="@{/createNewGame}" th:object="${gameCourt}" method="POST" id="form-create">
+                                <form th:action="@{/saveGame}" th:object="${game}" method="POST" id="form-register">
                                     <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
                                         <div>
-                                            <label class="text-gray-700 dark:text-gray-200" for="typeOfGame">Tipo
-                                                de Jogo</label>
-                                            <input id="typeOfGame" type="text" th:field="*{typeOfGame}"
-                                                   class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                                            <label class="text-gray-700 dark:text-gray-200" for="types">Tipo de Jogo</label>
+                                            <!--<input id="typeOfGame" type="text" th:field="*{typeOfGame}"
+                                                   class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"> -->
+
+                                            <select id="types"
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                    style="margin-top:10px" name="typeOfGame" th:field="*{typeOfGame}">>
+                                                <option th:each="typeOfGame : ${T(br.com.beachtennisbrazil.api.app.enums.TypeOfGame).values()}"
+                                                        th:value="${typeOfGame}" th:text="${typeOfGame}"></option>
+                                            </select>
                                         </div>
 
                                         <div>
-                                            <label class="text-gray-700 dark:text-gray-200" for="contractedHours">Horas
-                                                Contratadas</label>
-                                            <input id="contractedHours" type="text"
+                                            <label class="text-gray-700 dark:text-gray-200" for="contractedHours">Horas Contratadas</label>
+                                            <input id="contractedHours" type="text" th:field="*{contractedHours}"
                                                    class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
                                         </div>
 
 
                                         <div>
                                             <label class="text-gray-700 dark:text-gray-200" for="quantityPlayingNow">Quantidade de Jogadores</label>
-                                            <input id="quantityPlayingNow" type="text"
+                                            <input id="quantityPlayingNow" type="text" th:field="*{quantityPlayingNow}"
                                                    class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
                                         </div>
 
@@ -329,7 +334,7 @@
 
                                     <div class="flex justify-end mt-6">
                                         <button class="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600" type="submit">
-                                            Save
+                                            Lançar novo Jogo
                                         </button>
                                     </div>
                                 </form>

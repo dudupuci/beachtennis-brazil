@@ -23,33 +23,35 @@ public class CourtsWebController {
     @Autowired
     private GameCourtService service;
 
-
-    @GetMapping(value = "/courts")
+    @GetMapping(value = "/v1/dashboard/courts")
     public ModelAndView getAllLogins() {
         ModelAndView mav = new ModelAndView("courts");
         List<GameCourt> list = service.findAll();
+        mav.addObject("game", new GameCourt());
         mav.addObject("courts", list);
         return mav;
     }
 
+
     @GetMapping("/delete/{id}")
     public String deleteGameCourt(@PathVariable("id") UUID id, Model model) {
         service.deleteGameCourtById(id);
-        return "redirect:/courts";
+        return "redirect:/v1/dashboard/courts";
     }
 
-    @GetMapping("dashboard/createNewGame")
-    public ModelAndView addNewGame() {
-        ModelAndView mav = new ModelAndView("gameCourt");
-        GameCourtDTO gameCourt = new GameCourtDTO();
-        mav.addObject("gameCourt", gameCourt);
+   @GetMapping("/courts")
+    public ModelAndView getAll() {
+        ModelAndView mav = new ModelAndView("courts");
+        GameCourt game = new GameCourt();
+        mav.addObject("game", game);
         return mav;
     }
 
-    @PostMapping("/createNewGame")
-    public String createNewGame(@ModelAttribute GameCourtDTO gameCourt) {
-        service.createGameCourt(gameCourt.toEntity());
-        return "redirect:/courts";
+
+    @PostMapping("/saveGame")
+    public String saveGame(@ModelAttribute GameCourtDTO game) {
+        service.createGameCourt(game.toEntity());
+        return "redirect:/v1/dashboard/courts";
     }
 
 

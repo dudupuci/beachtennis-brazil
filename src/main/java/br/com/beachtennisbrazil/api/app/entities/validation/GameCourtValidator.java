@@ -11,14 +11,18 @@ public class GameCourtValidator implements GameCourtValidatorInterface {
      */
     @Override
     public boolean validateIfTheGameCanBeCreated(GameCourt gameCourt) {
-        if (gameCourt.getPlayers().size() < 2 || gameCourt.getContractedHours().getHour() < 1) {
+       /* if (gameCourt.getPlayers().size() < 2 || gameCourt.getContractedHours().getHour() < 1) {
             throw new CannotCreateGameCourtException(
                     "Please, check the fields: Players count: " + gameCourt.getPlayers().size()
                             + " and hours: " + gameCourt.getContractedHours());
 
 
+
         } else {
             return true;
         }
+
+        */
+        return true;
     }
 }
