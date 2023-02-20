@@ -1,6 +1,7 @@
 package br.com.beachtennisbrazil.api.app.entities;
 
 import br.com.beachtennisbrazil.api.app.dto.PlayerDTO;
+import br.com.beachtennisbrazil.api.app.entities.validation.interfaces.GameCodeGeneratorInterface;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.*;
@@ -17,7 +18,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@JsonPropertyOrder({"id", "name", "document", "telephone", "plan", "registrationDate" })
+@JsonPropertyOrder({"id", "name", "document", "telephone", "plan", "registrationDate"})
 public class Player {
 
     @Id
@@ -28,6 +29,8 @@ public class Player {
     @JoinColumn(name = "plan_id")
     private SubscriptionPlan plan;
 
+    @Column(name = "game_code", unique = true)
+    private Integer gameCode = GameCodeGeneratorInterface.getUniqueRandomGameCode();
     @Column(name = "name")
     private String name;
 
@@ -51,6 +54,5 @@ public class Player {
                 .registrationDate(this.registrationDate)
                 .build();
     }
-
 
 }

@@ -59,7 +59,7 @@ public class GameCourtService implements GameCourtServiceInterface {
     public void updateGameCourtData(GameCourt oldGameCourt, GameCourt newGameCourt) {
         oldGameCourt.setGameDate(newGameCourt.getGameDate());
         oldGameCourt.setTypeOfGame(newGameCourt.getTypeOfGame());
-        oldGameCourt.setPlayers(newGameCourt.getPlayers());
+        oldGameCourt.setGameCodes(newGameCourt.getGameCodes());
         oldGameCourt.setStartTime(newGameCourt.getStartTime());
         oldGameCourt.setContractedHours(newGameCourt.getContractedHours());
         oldGameCourt.setQuantityPlayingNow(newGameCourt.getQuantityPlayingNow());

@@ -1,8 +1,13 @@
 package br.com.beachtennisbrazil.api;
 
 import br.com.beachtennisbrazil.api.app.entities.GameCourt;
+import br.com.beachtennisbrazil.api.app.entities.Player;
+import br.com.beachtennisbrazil.api.app.entities.SubscriptionPlan;
+import br.com.beachtennisbrazil.api.app.enums.LoanableItem;
+import br.com.beachtennisbrazil.api.app.enums.SubscriptionPlanName;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cglib.core.Local;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
@@ -14,6 +19,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 @SpringBootApplication
 @EnableSwagger2
@@ -22,6 +30,19 @@ public class ApiApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ApiApplication.class, args);
+
+        SubscriptionPlan plan = new SubscriptionPlan();
+        Player player = new Player(UUID.randomUUID(), plan, 4030, "Carlinho", "14794524919", "44999543420", LocalDateTime.now());
+
+
+        Map<Integer, String> map = new HashMap<>();
+        map.put(player.getGameCode(), player.getName());
+
+        GameCourt gameCourt = new GameCourt();
+        gameCourt.setGameCodes(map);
+
+        System.out.println(gameCourt.getGameCodes());
+
 
     }
 }

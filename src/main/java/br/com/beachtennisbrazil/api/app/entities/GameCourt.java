@@ -16,9 +16,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @AllArgsConstructor
@@ -51,7 +49,7 @@ public class GameCourt {
     private TypeOfGame typeOfGame;
 
     @Transient
-    private List<Player> players = new ArrayList<>();
+    private Map<Integer, String> gameCodes = new HashMap<>();
 
     /* Só pode ser iniciado caso seja um jogo simples de 2 pessoas ou duplas, 4 pessoas.
        Só pode ser iniciado caso a quadra seja alocada por um dos jogadores,
@@ -70,7 +68,7 @@ public class GameCourt {
                 .loanables(this.loanables)
                 .quantityPlayingNow(this.quantityPlayingNow)
                 .typeOfGame(this.typeOfGame)
-                .players(this.players)
+                .gameCodes(this.gameCodes)
                 .build();
     }
 }

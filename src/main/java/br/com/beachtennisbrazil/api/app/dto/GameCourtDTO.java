@@ -13,9 +13,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Builder
 @Getter
@@ -33,7 +31,7 @@ public class GameCourtDTO {
     private List<Loanable> loanables = new ArrayList<>();
     private Integer quantityPlayingNow;
     private TypeOfGame typeOfGame;
-    private List<Player> players = new ArrayList<>();
+    private Map<Integer, String> gameCodes = new HashMap<>();
 
     public GameCourt toEntity() {
         return GameCourt.builder()
@@ -46,7 +44,7 @@ public class GameCourtDTO {
                 .loanables(this.loanables)
                 .quantityPlayingNow(this.quantityPlayingNow)
                 .typeOfGame(this.typeOfGame)
-                .players(this.players)
+                .gameCodes(this.gameCodes)
                 .build();
     }
 }
