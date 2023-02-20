@@ -1,6 +1,7 @@
 package br.com.beachtennisbrazil.api.app.entities;
 
 import br.com.beachtennisbrazil.api.app.dto.GameCourtDTO;
+import br.com.beachtennisbrazil.api.app.entities.converters.ArrayJsonConverter;
 import br.com.beachtennisbrazil.api.app.enums.TypeOfGame;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -11,6 +12,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -25,7 +27,7 @@ import java.util.*;
 @Setter
 @Builder
 @JsonPropertyOrder({"id", "gameDate", "typeOfGame", "startTime", "endTime", "contractedHours", "quantityPlayingNow"})
-public class GameCourt {
+public class GameCourt implements Serializable {
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -48,17 +50,13 @@ public class GameCourt {
     @Enumerated(EnumType.STRING)
     private TypeOfGame typeOfGame;
 
-    @ElementCollection
-    @CollectionTable(name = "player_game_code",
-            joinColumns = {@JoinColumn(name = "game_court_id", referencedColumnName = "id")})
-    @MapKeyColumn(name = "game_code")
-    @Column(name = "player_name")
-    private Map<Integer, String> gameCodes = new HashMap<>();
+    @Convert(converter = ArrayJsonConverter.class)
+    private Set<String> gameCodes = new HashSet<>();
 
     /* Só pode ser iniciado caso seja um jogo simples de 2 pessoas ou duplas, 4 pessoas.
        Só pode ser iniciado caso a quadra seja alocada por um dos jogadores,
         o jogador cadastrado e a quadra paga.
-       Pode também ser iniciada caso seja aula, torneio, etc.
+        Pode também ser iniciada caso seja aula, torneio, etc.
 
        Cada jogador tem um gameCode
      */

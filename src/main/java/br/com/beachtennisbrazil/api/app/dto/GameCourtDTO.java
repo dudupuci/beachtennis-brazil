@@ -1,10 +1,12 @@
 package br.com.beachtennisbrazil.api.app.dto;
 
+import br.com.beachtennisbrazil.api.app.entities.GameCode;
 import br.com.beachtennisbrazil.api.app.entities.GameCourt;
 import br.com.beachtennisbrazil.api.app.entities.Loanable;
 import br.com.beachtennisbrazil.api.app.entities.Player;
 import br.com.beachtennisbrazil.api.app.enums.TypeOfGame;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.models.auth.In;
 import lombok.*;
 
 import java.sql.Time;
@@ -31,7 +33,7 @@ public class GameCourtDTO {
     private List<Loanable> loanables = new ArrayList<>();
     private Integer quantityPlayingNow;
     private TypeOfGame typeOfGame;
-    private Map<Integer, String> gameCodes = new HashMap<>();
+    private Set<String> gameCodes = new HashSet<>();
 
     public GameCourt toEntity() {
         return GameCourt.builder()
