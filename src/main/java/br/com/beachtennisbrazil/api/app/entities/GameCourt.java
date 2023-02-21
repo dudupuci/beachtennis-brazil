@@ -61,6 +61,9 @@ public class GameCourt implements Serializable {
         Pode também ser iniciada caso seja aula, torneio, etc.
 
        Cada jogador tem um gameCode
+
+       Implementar consulta de jogadores por game code, registrar partidas jogadas para cada jogador
+       associado ao seus devidos gameCodes, implementar o botão de visualizar na tabela
      */
 
     public GameCourtDTO toDto() {
