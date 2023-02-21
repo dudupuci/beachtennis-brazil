@@ -1,22 +1,22 @@
 package br.com.beachtennisbrazil.api.app.entities;
 
 import br.com.beachtennisbrazil.api.app.dto.GameCourtDTO;
-import br.com.beachtennisbrazil.api.app.entities.converters.ArrayJsonConverter;
+import br.com.beachtennisbrazil.api.app.entities.converters.SetOfIntegersConverter;
 import br.com.beachtennisbrazil.api.app.enums.TypeOfGame;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
 
@@ -41,17 +41,19 @@ public class GameCourt implements Serializable {
     private Timestamp timeConverter = Timestamp.from(Instant.now());
     @JsonFormat(pattern = "HH:mm")
     private LocalTime startTime;
+    @JsonFormat(pattern = "HH:mm")
     private LocalTime contractedHours;
     @JsonFormat(pattern = "HH:mm")
     private LocalTime endTime;
     @Transient
     private List<Loanable> loanables = new ArrayList<>();
+
     private Integer quantityPlayingNow;
     @Enumerated(EnumType.STRING)
     private TypeOfGame typeOfGame;
 
-    @Convert(converter = ArrayJsonConverter.class)
-    private Set<String> gameCodes = new HashSet<>();
+    @Convert(converter = SetOfIntegersConverter.class)
+    private Set<Integer> gameCodes = new HashSet<>();
 
     /* Só pode ser iniciado caso seja um jogo simples de 2 pessoas ou duplas, 4 pessoas.
        Só pode ser iniciado caso a quadra seja alocada por um dos jogadores,

@@ -309,8 +309,8 @@
 
 
                                         <div>
-                                            <label class="text-gray-700 dark:text-gray-200" for="quantityPlayingNow">Quantidade de Jogadores</label>
-                                            <input id="quantityPlayingNow" type="text" th:field="*{quantityPlayingNow}" placeholder="Número inteiro"
+                                            <label class="text-gray-700 dark:text-gray-200" for="gameCodes">Códigos de Acesso</label>
+                                            <input id="gameCodes" type="text" th:field="*{gameCodes}" placeholder="Ex: 0000, 1111, 2222"
                                                    class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
                                         </div>
 
@@ -401,10 +401,10 @@
                     <th scope="col" class="px-6 py-3">Identificação da Quadra</th>
                     <th scope="col" class="px-6 py-3">Tipo de Jogo</th>
                     <th scope="col" class="px-6 py-3">Data de Jogo</th>
-                    <th scope="col" class="px-6 py-3">Informações</th>
+                    <th scope="col" class="px-6 py-3">Informações de Tempo</th>
                     <th scope="col" class="px-6 py-3">Horas</th>
-                    <th scope="col" class="px-6 py-3">Emprestáveis</th>
-                    <th scope="col" class="px-6 py-3">Jogadores</th>
+                    <th scope="col" class="px-6 py-3">Jogando</th>
+                    <th scope="col" class="px-6 py-3">Código de Acesso dos Jogadores</th>
                     <th scope="col" class="px-6 py-3" style="text-align:center">Ações Rápidas</th>
 
                 </tr>
@@ -422,10 +422,10 @@
                     <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" th:text="${court.id}"></td>
                     <td class="px-6 py-4" th:text="${court.typeOfGame}"></td>
                     <td class="px-6 py-4" th:text="${court.gameDate}"></td>
-                    <td class="px-6 py-4"><span>Início: <span th:text="${court.startTime}"></span></span> - <span>Término: <span th:text="${court.endTime}"></span></span></td>
+                    <td class="px-6 py-4"><span>Inc: <span th:text="${court.startTime}"></span> </span><span>Fim: <span th:text="${court.endTime}"></span></span></td>
                     <td class="px-6 py-4" th:text="${court.contractedHours}"></td>
-                    <td class="px-6 py-4" th:text="${court.loanables}"></td>
                     <td class="px-6 py-4" th:text="${court.quantityPlayingNow}"></td>
+                    <td class="px-6 py-4" th:text="${court.gameCodes}"></td>
                     <td class="flex items-center px-6 py-4 space-x-3">
 
                         <button data-modal-target="popup-modal-view" data-modal-toggle="popup-modal-view"

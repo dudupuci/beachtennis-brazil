@@ -44,6 +44,7 @@ public class GameCourtService implements GameCourtServiceInterface {
             var validator = gameValidator.validateIfTheGameCanBeCreated(gameCourt);
             gameCourt.setStartTime(LocalTime.of(gameCourt.getTimeConverter().getHours(), gameCourt.getTimeConverter().getMinutes()));
             gameCourt.setEndTime(gameCourt.getStartTime().plusHours(gameCourt.getContractedHours().getHour()).plusMinutes(gameCourt.getContractedHours().getMinute()));
+            gameCourt.setQuantityPlayingNow(gameCourt.getGameCodes().size());
 
             if (validator == true) {
                 repository.save(gameCourt);
