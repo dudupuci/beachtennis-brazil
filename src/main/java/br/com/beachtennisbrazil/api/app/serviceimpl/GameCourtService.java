@@ -17,8 +17,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.time.LocalTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Service
 @AllArgsConstructor
@@ -50,19 +54,22 @@ public class GameCourtService implements GameCourtServiceInterface {
             gameCourt.setQuantityPlayingNow(gameCourt.getGameCodes().size());
 
             for (int i = 0; i < gameCourt.getGameCodes().size(); i++) {
-               if (playerRepository.findByGameCode(gameCourt.getGameCodes().get(i)).getGameCode() == null) {
-                   throw new RuntimeException("TEM ALGUM QUE NAO BATE");
-               }
+                if (playerRepository.findByGameCode(gameCourt.getGameCodes().get(i)).getGameCode() == null ? false : true);
             }
 
-            if (validator == true) {
+            Set<Integer> hashSetGameCodes = new HashSet<>(gameCourt.getGameCodes());
+
+            if (hashSetGameCodes.size() == gameCourt.getGameCodes().size() && validator == true ? true : false) {
                 repository.save(gameCourt);
+            } else {
+                throw new RuntimeException("");
             }
+
 
         } catch (Exception err) {
-            throw new CannotCreateGameCourtException("Cannot create a game: " + err.getMessage());
+            throw new CannotCreateGameCourtException("Cannot create a game: Please, check the game codes list and try again! " +
+                    "Game codes inserted:" + gameCourt.getGameCodes() + " " + err.getMessage());
         }
-
     }
 
     @Override
@@ -88,7 +95,6 @@ public class GameCourtService implements GameCourtServiceInterface {
         } catch (Exception err) {
             throw new CannotUpdateGameCourtException("Captured error: " + err.getMessage());
         }
-
     }
 
     @Override
@@ -98,6 +104,5 @@ public class GameCourtService implements GameCourtServiceInterface {
         } catch (Exception err) {
             throw new EntityNotFoundException("Captured error: Game Court ID: " + id + " has not found! " + err.getMessage());
         }
-
     }
 }
