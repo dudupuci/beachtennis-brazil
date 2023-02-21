@@ -27,6 +27,9 @@ public class GameCourtService implements GameCourtServiceInterface {
     @Autowired
     private GameCourtRepository repository;
 
+    @Autowired
+    private PlayerRepository playerRepository;
+
     @Override
     public List<GameCourt> findAll() {
         return repository.findAll();
@@ -45,6 +48,12 @@ public class GameCourtService implements GameCourtServiceInterface {
             gameCourt.setStartTime(LocalTime.of(gameCourt.getTimeConverter().getHours(), gameCourt.getTimeConverter().getMinutes()));
             gameCourt.setEndTime(gameCourt.getStartTime().plusHours(gameCourt.getContractedHours().getHour()).plusMinutes(gameCourt.getContractedHours().getMinute()));
             gameCourt.setQuantityPlayingNow(gameCourt.getGameCodes().size());
+
+            for (int i = 0; i < gameCourt.getGameCodes().size(); i++) {
+               if (playerRepository.findByGameCode(gameCourt.getGameCodes().get(i)).getGameCode() == null) {
+                   throw new RuntimeException("TEM ALGUM QUE NAO BATE");
+               }
+            }
 
             if (validator == true) {
                 repository.save(gameCourt);

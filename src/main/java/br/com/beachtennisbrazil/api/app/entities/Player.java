@@ -17,6 +17,7 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Builder
 @JsonPropertyOrder({"id", "name", "document", "telephone", "plan", "registrationDate"})
 public class Player {

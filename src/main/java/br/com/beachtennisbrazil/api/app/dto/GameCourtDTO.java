@@ -28,7 +28,7 @@ public class GameCourtDTO {
     private List<Loanable> loanables = new ArrayList<>();
     private Integer quantityPlayingNow;
     private TypeOfGame typeOfGame;
-    private Set<Integer> gameCodes = new HashSet<>();
+    private List<Integer> gameCodes = new ArrayList<>();
 
     public GameCourt toEntity() {
         return GameCourt.builder()

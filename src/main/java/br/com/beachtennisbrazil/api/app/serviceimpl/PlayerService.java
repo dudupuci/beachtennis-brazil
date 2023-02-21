@@ -28,6 +28,21 @@ public class PlayerService implements PlayerServiceInterface {
     }
 
     @Override
+    public Player findByGameCode(Integer gameCode) {
+        return repository.findByGameCode(gameCode);
+    }
+
+    @Override
+    public Player findByName(String name) {
+        return repository.findByName(name);
+    }
+
+    @Override
+    public Player findByCpf(String cpf) {
+        return repository.findByCpf(cpf);
+    }
+
+    @Override
     public void save(Player player) {
         try {
             repository.save(player);

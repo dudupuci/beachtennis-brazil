@@ -28,6 +28,16 @@ import java.util.*;
 @Builder
 @JsonPropertyOrder({"id", "gameDate", "typeOfGame", "startTime", "endTime", "contractedHours", "quantityPlayingNow"})
 public class GameCourt implements Serializable {
+      /* Só pode ser iniciado caso seja um jogo simples de 2 pessoas ou duplas, 4 pessoas.
+       Só pode ser iniciado caso a quadra seja alocada por um dos jogadores,
+        o jogador cadastrado e a quadra paga.
+        Pode também ser iniciada caso seja aula, torneio, etc.
+
+       Cada jogador tem um gameCode
+
+       Implementar consulta de jogadores por game code, registrar partidas jogadas para cada jogador
+       associado ao seus devidos gameCodes, implementar o botão de visualizar na tabela
+     */
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -53,18 +63,7 @@ public class GameCourt implements Serializable {
     private TypeOfGame typeOfGame;
 
     @Convert(converter = SetOfIntegersConverter.class)
-    private Set<Integer> gameCodes = new HashSet<>();
-
-    /* Só pode ser iniciado caso seja um jogo simples de 2 pessoas ou duplas, 4 pessoas.
-       Só pode ser iniciado caso a quadra seja alocada por um dos jogadores,
-        o jogador cadastrado e a quadra paga.
-        Pode também ser iniciada caso seja aula, torneio, etc.
-
-       Cada jogador tem um gameCode
-
-       Implementar consulta de jogadores por game code, registrar partidas jogadas para cada jogador
-       associado ao seus devidos gameCodes, implementar o botão de visualizar na tabela
-     */
+    private List<Integer> gameCodes = new ArrayList<>();
 
     public GameCourtDTO toDto() {
         return GameCourtDTO.builder()
