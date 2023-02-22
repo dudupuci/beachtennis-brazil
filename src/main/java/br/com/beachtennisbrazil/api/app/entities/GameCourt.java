@@ -8,17 +8,20 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+import javax.websocket.OnError;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 @Entity
 @AllArgsConstructor
@@ -27,7 +30,7 @@ import java.util.*;
 @Setter
 @Builder
 @JsonPropertyOrder({"id", "gameDate", "typeOfGame", "startTime", "endTime", "contractedHours", "quantityPlayingNow"})
-public class GameCourt implements Serializable {
+public class  GameCourt implements Serializable {
       /* Só pode ser iniciado caso seja um jogo simples de 2 pessoas ou duplas, 4 pessoas.
        Só pode ser iniciado caso a quadra seja alocada por um dos jogadores,
         o jogador cadastrado e a quadra paga.
@@ -52,6 +55,7 @@ public class GameCourt implements Serializable {
     @JsonFormat(pattern = "HH:mm")
     private LocalTime startTime;
     @JsonFormat(pattern = "HH:mm")
+    @NotEmpty(message = "Cannot be empty.")
     private LocalTime contractedHours;
     @JsonFormat(pattern = "HH:mm")
     private LocalTime endTime;
@@ -63,6 +67,8 @@ public class GameCourt implements Serializable {
     private TypeOfGame typeOfGame;
 
     @Convert(converter = SetOfIntegersConverter.class)
+    @Size(min = 2, max = 4, message = "Check the field!")
+    @NotEmpty(message = "Cannot be empty.")
     private List<Integer> gameCodes = new ArrayList<>();
 
     public GameCourtDTO toDto() {
