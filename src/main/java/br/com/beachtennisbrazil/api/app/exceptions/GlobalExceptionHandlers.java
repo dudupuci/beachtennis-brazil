@@ -12,8 +12,8 @@ import java.time.Instant;
 @ControllerAdvice
 public class GlobalExceptionHandlers {
 
-    @ExceptionHandler(CannotCreateGameCourtException.class)
-    public ResponseEntity<StandardResponseError> standardErrorCannotCreateGameCourtException(CannotCreateGameCourtException exception, HttpServletRequest request) {
+    @ExceptionHandler(CannotCreateBeachTennisGameException.class)
+    public ResponseEntity<StandardResponseError> standardErrorCannotCreateBeachTennisGameException(CannotCreateBeachTennisGameException exception, HttpServletRequest request) {
         String error = "Cannot create game court!";
         HttpStatus status = HttpStatus.BAD_REQUEST;
         StandardResponseError response = new StandardResponseError(

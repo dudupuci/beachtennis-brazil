@@ -1,6 +1,6 @@
 package br.com.beachtennisbrazil.api.system.serviceimpl;
 
-import br.com.beachtennisbrazil.api.app.exceptions.CannotCreateGameCourtException;
+import br.com.beachtennisbrazil.api.app.exceptions.CannotCreateBeachTennisGameException;
 import br.com.beachtennisbrazil.api.system.dto.LoginDTO;
 import br.com.beachtennisbrazil.api.system.entities.Login;
 import br.com.beachtennisbrazil.api.system.exceptions.CannotFindLoginInDatabaseException;
@@ -23,7 +23,7 @@ public class LoginService implements LoginInterface{
 
     @Override
     public Login findById(UUID id) {
-        return repository.findById(id).orElseThrow(() -> new CannotCreateGameCourtException("Cannot find login!"));
+        return repository.findById(id).orElseThrow(() -> new CannotCreateBeachTennisGameException("Cannot find login!"));
     }
 
     @Override

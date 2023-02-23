@@ -1,6 +1,6 @@
 package br.com.beachtennisbrazil.api.app.entities;
 
-import br.com.beachtennisbrazil.api.app.dto.GameCourtDTO;
+import br.com.beachtennisbrazil.api.app.dto.BeachTennisGameDto;
 import br.com.beachtennisbrazil.api.app.enums.TypeOfGame;
 import br.com.beachtennisbrazil.api.system.entities.converters.ListOfIntegersConverter;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -27,7 +27,7 @@ import java.util.UUID;
 @Setter
 @Builder
 @JsonPropertyOrder({"id", "gameDate", "typeOfGame", "startTime", "endTime", "contractedHours", "quantityPlayingNow"})
-public class GameCourt implements Serializable {
+public class BeachTennisGame implements Serializable {
       /* Só pode ser iniciado caso seja um jogo simples de 2 pessoas ou duplas, 4 pessoas.
        Só pode ser iniciado caso a quadra seja alocada por um dos jogadores,
         o jogador cadastrado e a quadra paga.
@@ -65,8 +65,8 @@ public class GameCourt implements Serializable {
     @Convert(converter = ListOfIntegersConverter.class)
     private List<Integer> gameCodes = new ArrayList<>();
 
-    public GameCourtDTO toDto() {
-        return GameCourtDTO.builder()
+    public BeachTennisGameDto toDto() {
+        return BeachTennisGameDto.builder()
                 .id(this.id)
                 .timeConverter(this.timeConverter)
                 .gameDate(this.gameDate)

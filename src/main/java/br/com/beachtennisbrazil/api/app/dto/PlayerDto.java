@@ -2,7 +2,6 @@ package br.com.beachtennisbrazil.api.app.dto;
 
 import br.com.beachtennisbrazil.api.app.entities.Player;
 import br.com.beachtennisbrazil.api.app.entities.SubscriptionPlan;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +12,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Builder
-public class PlayerDTO {
+public class PlayerDto {
 
     private UUID id;
     private String name;

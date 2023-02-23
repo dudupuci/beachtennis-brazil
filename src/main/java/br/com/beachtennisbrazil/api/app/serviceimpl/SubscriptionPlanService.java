@@ -1,10 +1,7 @@
 package br.com.beachtennisbrazil.api.app.serviceimpl;
 
-import br.com.beachtennisbrazil.api.app.entities.GameCourt;
 import br.com.beachtennisbrazil.api.app.entities.SubscriptionPlan;
-import br.com.beachtennisbrazil.api.app.repositories.GameCourtRepository;
 import br.com.beachtennisbrazil.api.app.repositories.SubscriptionPlanRepository;
-import br.com.beachtennisbrazil.api.app.service.GameCourtServiceInterface;
 import br.com.beachtennisbrazil.api.app.service.SubscriptionPlanServiceInterface;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

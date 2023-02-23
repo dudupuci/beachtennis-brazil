@@ -1,8 +1,8 @@
 package br.com.beachtennisbrazil.api.app.controllers;
 
-import br.com.beachtennisbrazil.api.app.dto.GameCourtDTO;
-import br.com.beachtennisbrazil.api.app.entities.GameCourt;
-import br.com.beachtennisbrazil.api.app.serviceimpl.GameCourtService;
+import br.com.beachtennisbrazil.api.app.dto.BeachTennisGameDto;
+import br.com.beachtennisbrazil.api.app.entities.BeachTennisGame;
+import br.com.beachtennisbrazil.api.app.serviceimpl.BeachTennisGameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,24 +14,24 @@ import java.util.UUID;
 @RestController
 @RequestMapping(path = "/games")
 @CrossOrigin("*")
-public class GameCourtController {
+public class BeachTennisGameController {
 
     @Autowired
-    private GameCourtService service;
+    private BeachTennisGameService service;
 
     @GetMapping
-    public ResponseEntity<List<GameCourt>> findAll() {
+    public ResponseEntity<List<BeachTennisGame>> findAll() {
         return ResponseEntity.ok().body(service.findAll());
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<GameCourtDTO> findById(@PathVariable("id") UUID id) {
+    public ResponseEntity<BeachTennisGameDto> findById(@PathVariable("id") UUID id) {
         return ResponseEntity.ok().body(service.findById(id).toDto());
     }
 
     @PostMapping
-    public ResponseEntity<Void> save(@RequestBody GameCourtDTO dto) {
-        service.createGameCourt(dto.toEntity());
+    public ResponseEntity<Void> save(@RequestBody BeachTennisGameDto dto) {
+        service.createBeachTennisGame(dto.toEntity());
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }

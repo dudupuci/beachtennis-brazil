@@ -1,8 +1,7 @@
 package br.com.beachtennisbrazil.api.app.dto;
 
-import br.com.beachtennisbrazil.api.app.entities.GameCourt;
+import br.com.beachtennisbrazil.api.app.entities.BeachTennisGame;
 import br.com.beachtennisbrazil.api.app.entities.Loanable;
-import br.com.beachtennisbrazil.api.app.entities.Player;
 import br.com.beachtennisbrazil.api.app.enums.TypeOfGame;
 import lombok.*;
 
@@ -17,7 +16,7 @@ import java.util.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class GameCourtDTO {
+public class BeachTennisGameDto {
     private UUID id;
     private LocalDate gameDate = LocalDate.now();
 
@@ -30,8 +29,8 @@ public class GameCourtDTO {
     private TypeOfGame typeOfGame;
     private List<Integer> gameCodes = new ArrayList<>();
 
-    public GameCourt toEntity() {
-        return GameCourt.builder()
+    public BeachTennisGame toEntity() {
+        return BeachTennisGame.builder()
                 .id(this.id)
                 .gameDate(this.gameDate)
                 .timeConverter(this.timeConverter)

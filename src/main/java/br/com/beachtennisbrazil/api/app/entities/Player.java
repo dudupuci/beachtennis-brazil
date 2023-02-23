@@ -1,6 +1,6 @@
 package br.com.beachtennisbrazil.api.app.entities;
 
-import br.com.beachtennisbrazil.api.app.dto.PlayerDTO;
+import br.com.beachtennisbrazil.api.app.dto.PlayerDto;
 import br.com.beachtennisbrazil.api.app.entities.validation.interfaces.GameCodeGeneratorInterface;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -45,8 +45,8 @@ public class Player {
     @JsonFormat(pattern = "YYYY-MM-dd HH:mm")
     private LocalDateTime registrationDate = LocalDateTime.now();
 
-    public PlayerDTO toDto() {
-        return PlayerDTO.builder()
+    public PlayerDto toDto() {
+        return PlayerDto.builder()
                 .id(this.id)
                 .name(this.name)
                 .telephone(this.telephone)
