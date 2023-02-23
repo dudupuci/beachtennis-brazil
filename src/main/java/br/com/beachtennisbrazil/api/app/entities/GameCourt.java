@@ -1,24 +1,24 @@
 package br.com.beachtennisbrazil.api.app.entities;
 
 import br.com.beachtennisbrazil.api.app.dto.GameCourtDTO;
-import br.com.beachtennisbrazil.api.app.entities.converters.SetOfIntegersConverter;
 import br.com.beachtennisbrazil.api.app.enums.TypeOfGame;
+import br.com.beachtennisbrazil.api.system.entities.converters.ListOfIntegersConverter;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 @Entity
 @AllArgsConstructor
@@ -62,7 +62,7 @@ public class GameCourt implements Serializable {
     @Enumerated(EnumType.STRING)
     private TypeOfGame typeOfGame;
 
-    @Convert(converter = SetOfIntegersConverter.class)
+    @Convert(converter = ListOfIntegersConverter.class)
     private List<Integer> gameCodes = new ArrayList<>();
 
     public GameCourtDTO toDto() {
