@@ -401,7 +401,7 @@
                     <th scope="col" class="px-6 py-3">Identificação da Quadra</th>
                     <th scope="col" class="px-6 py-3">Tipo de Jogo</th>
                     <th scope="col" class="px-6 py-3">Data de Jogo</th>
-                    <th scope="col" class="px-6 py-3">Informações de Tempo</th>
+                    <th scope="col" class="px-6 py-3">Início e Término</th>
                     <th scope="col" class="px-6 py-3">Horas</th>
                     <th scope="col" class="px-6 py-3">Jogando</th>
                     <th scope="col" class="px-6 py-3">Código de Acesso dos Jogadores</th>
@@ -422,7 +422,7 @@
                     <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" th:text="${court.id}"></td>
                     <td class="px-6 py-4" th:text="${court.typeOfGame}"></td>
                     <td class="px-6 py-4" th:text="${court.gameDate}"></td>
-                    <td class="px-6 py-4"><span>Inc: <span th:text="${court.startTime}"></span> </span><span>Fim: <span th:text="${court.endTime}"></span></span></td>
+                    <td class="px-6 py-4"><span><span th:text="${court.startTime}"></span> </span><span> - <span th:text="${court.endTime}"></span></span></td>
                     <td class="px-6 py-4" th:text="${court.contractedHours}"></td>
                     <td class="px-6 py-4" th:text="${court.quantityPlayingNow}"></td>
                     <td class="px-6 py-4" th:text="${court.gameCodes}"></td>
