@@ -2,13 +2,11 @@ package br.com.beachtennisbrazil.api.app.controllers;
 
 import br.com.beachtennisbrazil.api.app.entities.Player;
 import br.com.beachtennisbrazil.api.app.serviceimpl.PlayerService;
-import io.swagger.models.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.UUID;
 
@@ -23,6 +21,11 @@ public class PlayerController {
     @GetMapping
     public ResponseEntity<List<Player>> findAll() {
         return ResponseEntity.ok().body(service.findAll());
+    }
+
+    @GetMapping(value = "/information")
+    public ResponseEntity<List<Player>> findAllInformationFromPlayers() {
+        return ResponseEntity.ok().body(service.findAllInformationFromPlayers());
     }
 
     @GetMapping(value = "/{id}")

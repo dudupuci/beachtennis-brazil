@@ -54,7 +54,8 @@ public class GameCourtService implements GameCourtServiceInterface {
             gameCourt.setQuantityPlayingNow(gameCourt.getGameCodes().size());
 
             for (int i = 0; i < gameCourt.getGameCodes().size(); i++) {
-                if (playerRepository.findByGameCode(gameCourt.getGameCodes().get(i)).getGameCode() == null ? false : true);
+                if (playerRepository.findByGameCode(gameCourt.getGameCodes().get(i)).getGameCode() == null ? false : true)
+                    ;
             }
 
             Set<Integer> hashSetGameCodes = new HashSet<>(gameCourt.getGameCodes());

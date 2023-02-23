@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.UUID;
 
 public interface PlayerServiceInterface {
+
     List<Player> findAll();
+    List<Player> findAllInformationFromPlayers();
     Player findById(UUID id);
     Player findByGameCode(Integer gameCode);
     Player findByName(String name);
