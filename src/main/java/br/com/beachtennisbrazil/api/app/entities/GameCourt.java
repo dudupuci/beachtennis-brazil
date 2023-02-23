@@ -52,7 +52,6 @@ public class GameCourt implements Serializable {
     @JsonFormat(pattern = "HH:mm")
     private LocalTime startTime;
     @JsonFormat(pattern = "HH:mm")
-    @NotEmpty(message = "Cannot be empty.")
     private LocalTime contractedHours;
     @JsonFormat(pattern = "HH:mm")
     private LocalTime endTime;
