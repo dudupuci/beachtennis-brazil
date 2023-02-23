@@ -27,6 +27,6 @@ public class RegisterWebController {
     @PostMapping("/saveRegister")
     public String saveRegister(@ModelAttribute Register register) {
         service.convertRegisterToLogin(register);
-        return "redirect:/list-logins";
+        return "redirect:/dashboard/login";
     }
 }
