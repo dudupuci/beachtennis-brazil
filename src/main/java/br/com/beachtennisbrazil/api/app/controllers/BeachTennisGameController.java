@@ -2,6 +2,7 @@ package br.com.beachtennisbrazil.api.app.controllers;
 
 import br.com.beachtennisbrazil.api.app.dto.BeachTennisGameDto;
 import br.com.beachtennisbrazil.api.app.entities.BeachTennisGame;
+import br.com.beachtennisbrazil.api.app.entities.GameWithoutAppointment;
 import br.com.beachtennisbrazil.api.app.serviceimpl.BeachTennisGameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,13 +26,13 @@ public class BeachTennisGameController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<BeachTennisGameDto> findById(@PathVariable("id") UUID id) {
-        return ResponseEntity.ok().body(service.findById(id).toDto());
+    public ResponseEntity<BeachTennisGame> findById(@PathVariable("id") UUID id) {
+        return ResponseEntity.ok().body(service.findById(id));
     }
 
     @PostMapping
-    public ResponseEntity<Void> save(@RequestBody BeachTennisGameDto dto) {
-        service.createBeachTennisGame(dto.toEntity());
+    public ResponseEntity<Void> save(@RequestBody GameWithoutAppointment dto) {
+        service.createBeachTennisGame(dto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }

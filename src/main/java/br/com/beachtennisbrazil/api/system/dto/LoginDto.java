@@ -10,7 +10,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class LoginDTO {
+public class LoginDto {
 
     @JsonIgnore
     private UUID id;

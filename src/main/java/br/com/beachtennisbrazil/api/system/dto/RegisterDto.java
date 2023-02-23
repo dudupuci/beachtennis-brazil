@@ -1,6 +1,5 @@
 package br.com.beachtennisbrazil.api.system.dto;
 
-import br.com.beachtennisbrazil.api.system.entities.Login;
 import br.com.beachtennisbrazil.api.system.entities.Register;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,7 +12,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class RegisterDTO {
+public class RegisterDto {
 
     private UUID id;
     private String username;

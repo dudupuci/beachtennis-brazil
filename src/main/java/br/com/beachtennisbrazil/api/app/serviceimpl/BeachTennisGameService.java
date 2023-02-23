@@ -1,6 +1,7 @@
 package br.com.beachtennisbrazil.api.app.serviceimpl;
 
 import br.com.beachtennisbrazil.api.app.entities.BeachTennisGame;
+import br.com.beachtennisbrazil.api.app.entities.GameWithoutAppointment;
 import br.com.beachtennisbrazil.api.app.entities.validation.BeachTennisGameValidator;
 import br.com.beachtennisbrazil.api.app.exceptions.CannotCreateBeachTennisGameException;
 import br.com.beachtennisbrazil.api.app.exceptions.CannotUpdateBeachTennisGameException;
@@ -39,23 +40,23 @@ public class BeachTennisGameService implements BeachTennisGameServiceInterface {
     }
 
     @Override
-    public void createBeachTennisGame(BeachTennisGame beachTennisGame) {
+    public void createBeachTennisGame(GameWithoutAppointment gameWithoutAppointment) {
         try {
             BeachTennisGameValidator gameValidator = new BeachTennisGameValidator();
-            var validator = gameValidator.validateIfTheGameCanBeCreated(beachTennisGame);
-            beachTennisGame.setStartTime(LocalTime.of(beachTennisGame.getTimeConverter().getHours(), beachTennisGame.getTimeConverter().getMinutes()));
-            beachTennisGame.setEndTime(beachTennisGame.getStartTime().plusHours(beachTennisGame.getContractedHours().getHour()).plusMinutes(beachTennisGame.getContractedHours().getMinute()));
-            beachTennisGame.setQuantityPlayingNow(beachTennisGame.getGameCodes().size());
+            var validator = gameValidator.validateIfTheGameCanBeCreated(gameWithoutAppointment);
+            gameWithoutAppointment.setStartTime(LocalTime.of(gameWithoutAppointment.getTimeConverter().getHours(), gameWithoutAppointment.getTimeConverter().getMinutes()));
+            gameWithoutAppointment.setEndTime(gameWithoutAppointment.getStartTime().plusHours(gameWithoutAppointment.getContractedHours().getHour()).plusMinutes(gameWithoutAppointment.getContractedHours().getMinute()));
+            gameWithoutAppointment.setQuantityPlayingNow(gameWithoutAppointment.getGameCodes().size());
 
-            for (int i = 0; i < beachTennisGame.getGameCodes().size(); i++) {
-                if (playerRepository.findByGameCode(beachTennisGame.getGameCodes().get(i)).getGameCode() == null ? false : true)
+            for (int i = 0; i < gameWithoutAppointment.getGameCodes().size(); i++) {
+                if (playerRepository.findByGameCode(gameWithoutAppointment.getGameCodes().get(i)).getGameCode() == null ? false : true)
                     ;
             }
 
-            Set<Integer> hashSetGameCodes = new HashSet<>(beachTennisGame.getGameCodes());
+            Set<Integer> hashSetGameCodes = new HashSet<>(gameWithoutAppointment.getGameCodes());
 
-            if (hashSetGameCodes.size() == beachTennisGame.getGameCodes().size() && validator == true ? true : false) {
-                repository.save(beachTennisGame);
+            if (hashSetGameCodes.size() == gameWithoutAppointment.getGameCodes().size() && validator == true ? true : false) {
+                repository.save(gameWithoutAppointment);
             } else {
                 throw new RuntimeException("");
             }
@@ -63,7 +64,7 @@ public class BeachTennisGameService implements BeachTennisGameServiceInterface {
 
         } catch (Exception err) {
             throw new CannotCreateBeachTennisGameException("Cannot create a game: Please, check the game codes list and try again! " +
-                    "Game codes inserted:" + beachTennisGame.getGameCodes() + " " + err.getMessage());
+                    "Game codes inserted:" + gameWithoutAppointment.getGameCodes() + " " + err.getMessage());
         }
     }
 

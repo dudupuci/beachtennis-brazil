@@ -1,7 +1,7 @@
 package br.com.beachtennisbrazil.api.system.controllers;
 
-import br.com.beachtennisbrazil.api.system.dto.LoginDTO;
-import br.com.beachtennisbrazil.api.system.dto.RecoveryPasswordDTO;
+import br.com.beachtennisbrazil.api.system.dto.LoginDto;
+import br.com.beachtennisbrazil.api.system.dto.RecoveryPasswordDto;
 import br.com.beachtennisbrazil.api.system.entities.Login;
 import br.com.beachtennisbrazil.api.system.serviceimpl.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,13 +31,13 @@ public class LoginController {
     }
 
     @PostMapping
-    public ResponseEntity<LoginDTO> authenticate(@RequestBody @Valid LoginDTO loginDto) {
+    public ResponseEntity<LoginDto> authenticate(@RequestBody @Valid LoginDto loginDto) {
         var authentication = service.authenticate(loginDto.toLogin());
         return ResponseEntity.ok().body(authentication);
     }
 
     @PostMapping(value = "/account-lost")
-    public ResponseEntity<LoginDTO> recoverPassword(@RequestBody RecoveryPasswordDTO recovery) {
+    public ResponseEntity<LoginDto> recoverPassword(@RequestBody RecoveryPasswordDto recovery) {
         var login = service.recoveryPassword(recovery.getEmail());
         return ResponseEntity.ok().body(login.toDto());
     }

@@ -1,14 +1,10 @@
 package br.com.beachtennisbrazil.api.system.entities;
 
-import br.com.beachtennisbrazil.api.system.dto.LoginDTO;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import br.com.beachtennisbrazil.api.system.dto.LoginDto;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.UUID;
 
@@ -33,8 +29,8 @@ public class Login {
     @OneToMany(mappedBy = "login", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<SentEmail> emails;
 
-    public LoginDTO toDto() {
-        return LoginDTO.builder()
+    public LoginDto toDto() {
+        return LoginDto.builder()
                 .id(this.id)
                 .username(this.username)
                 .password(this.password)

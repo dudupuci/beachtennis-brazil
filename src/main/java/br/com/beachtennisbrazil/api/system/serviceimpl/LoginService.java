@@ -1,7 +1,7 @@
 package br.com.beachtennisbrazil.api.system.serviceimpl;
 
 import br.com.beachtennisbrazil.api.app.exceptions.CannotCreateBeachTennisGameException;
-import br.com.beachtennisbrazil.api.system.dto.LoginDTO;
+import br.com.beachtennisbrazil.api.system.dto.LoginDto;
 import br.com.beachtennisbrazil.api.system.entities.Login;
 import br.com.beachtennisbrazil.api.system.exceptions.CannotFindLoginInDatabaseException;
 import br.com.beachtennisbrazil.api.system.repositories.LoginRepository;
@@ -27,7 +27,7 @@ public class LoginService implements LoginInterface{
     }
 
     @Override
-    public LoginDTO authenticate(Login login) {
+    public LoginDto authenticate(Login login) {
         var authentication = repository.findByUsernameAndPassword(login.getUsername(), login.getPassword());
         if (authentication != null) {
             return authentication.toDto();

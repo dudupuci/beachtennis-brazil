@@ -13,11 +13,7 @@ public class ApiApplication {
 
 
     public static void main(String[] args) {
-        PlayerRepository repository = null;
         SpringApplication.run(ApiApplication.class, args);
-
-
-
     }
 }
 

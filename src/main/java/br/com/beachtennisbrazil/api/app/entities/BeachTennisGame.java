@@ -2,6 +2,7 @@ package br.com.beachtennisbrazil.api.app.entities;
 
 import br.com.beachtennisbrazil.api.app.dto.BeachTennisGameDto;
 import br.com.beachtennisbrazil.api.app.enums.TypeOfGame;
+import br.com.beachtennisbrazil.api.app.enums.TypeOfSchedule;
 import br.com.beachtennisbrazil.api.system.entities.converters.ListOfIntegersConverter;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -26,26 +27,15 @@ import java.util.UUID;
 @Getter
 @Setter
 @Builder
-@JsonPropertyOrder({"id", "gameDate", "typeOfGame", "startTime", "endTime", "contractedHours", "quantityPlayingNow"})
+@Table(name = "beach_tennis_game")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "type")
 public class BeachTennisGame implements Serializable {
-      /* Só pode ser iniciado caso seja um jogo simples de 2 pessoas ou duplas, 4 pessoas.
-       Só pode ser iniciado caso a quadra seja alocada por um dos jogadores,
-        o jogador cadastrado e a quadra paga.
-        Pode também ser iniciada caso seja aula, torneio, etc.
-
-       Cada jogador tem um gameCode
-
-       Implementar consulta de jogadores por game code, registrar partidas jogadas para cada jogador
-       associado ao seus devidos gameCodes, implementar o botão de visualizar na tabela
-     */
 
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
-    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
-    @JsonFormat(pattern = "YYYY-MM-dd")
-    private LocalDate gameDate = LocalDate.now();
     @JsonIgnore
     @Transient
     private Timestamp timeConverter = Timestamp.from(Instant.now());
@@ -55,6 +45,7 @@ public class BeachTennisGame implements Serializable {
     private LocalTime contractedHours;
     @JsonFormat(pattern = "HH:mm")
     private LocalTime endTime;
+    private LocalDate gameDate = LocalDate.now();
     @Transient
     private List<Loanable> loanables = new ArrayList<>();
 
@@ -62,21 +53,12 @@ public class BeachTennisGame implements Serializable {
     @Enumerated(EnumType.STRING)
     private TypeOfGame typeOfGame;
 
+    @Enumerated(EnumType.STRING)
+    private TypeOfSchedule typeOfSchedule;
+
+
+    // implementar os game codes apenas para quem for agendar no sistema.
     @Convert(converter = ListOfIntegersConverter.class)
     private List<Integer> gameCodes = new ArrayList<>();
 
-    public BeachTennisGameDto toDto() {
-        return BeachTennisGameDto.builder()
-                .id(this.id)
-                .timeConverter(this.timeConverter)
-                .gameDate(this.gameDate)
-                .startTime(this.startTime)
-                .contractedHours(this.contractedHours)
-                .endTime(this.endTime)
-                .loanables(this.loanables)
-                .quantityPlayingNow(this.quantityPlayingNow)
-                .typeOfGame(this.typeOfGame)
-                .gameCodes(this.gameCodes)
-                .build();
-    }
 }

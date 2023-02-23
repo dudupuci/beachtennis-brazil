@@ -1,8 +1,6 @@
 package br.com.beachtennisbrazil.api.system.thymeleaf;
 
-import br.com.beachtennisbrazil.api.system.dto.LoginDTO;
 import br.com.beachtennisbrazil.api.system.entities.Login;
-import br.com.beachtennisbrazil.api.system.entities.Register;
 import br.com.beachtennisbrazil.api.system.repositories.LoginRepository;
 import br.com.beachtennisbrazil.api.system.serviceimpl.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
