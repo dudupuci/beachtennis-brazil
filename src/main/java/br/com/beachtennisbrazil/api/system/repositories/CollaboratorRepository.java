@@ -1,7 +1,6 @@
 package br.com.beachtennisbrazil.api.system.repositories;
 
 import br.com.beachtennisbrazil.api.system.entities.Collaborator;
-import br.com.beachtennisbrazil.api.system.entities.Login;
 import br.com.beachtennisbrazil.api.system.enums.CollaboratorPaper;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.util.Streamable;

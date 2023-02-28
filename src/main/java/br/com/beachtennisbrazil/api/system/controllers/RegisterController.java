@@ -18,6 +18,6 @@ public class RegisterController {
     @PostMapping
     public ResponseEntity<String> register(@RequestBody Register register) {
         service.convertRegisterToLogin(register);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Successfully registered! Username: "+register.getUsername());
+        return ResponseEntity.status(HttpStatus.CREATED).body("Successfully registered! Username: "+ register.getUsername());
     }
 }

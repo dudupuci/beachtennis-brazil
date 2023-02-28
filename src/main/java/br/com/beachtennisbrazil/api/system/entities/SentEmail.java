@@ -3,7 +3,6 @@ package br.com.beachtennisbrazil.api.system.entities;
 import br.com.beachtennisbrazil.api.system.enums.TypeOfEmailSent;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
-import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;

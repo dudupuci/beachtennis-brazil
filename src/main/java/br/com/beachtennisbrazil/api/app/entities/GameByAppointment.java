@@ -9,5 +9,8 @@ import java.time.LocalDate;
 @DiscriminatorValue("game_by_appointment")
 public class GameByAppointment extends BeachTennisGame {
 
-    private String name;
+    private LocalDate appointmentDate;
+
+
+
 }

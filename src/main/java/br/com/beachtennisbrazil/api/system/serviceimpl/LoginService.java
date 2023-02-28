@@ -15,7 +15,7 @@ import java.util.UUID;
 
 @Service
 @AllArgsConstructor
-public class LoginService implements LoginInterface{
+public class LoginService implements LoginInterface {
 
     @Autowired
     private LoginRepository repository;
@@ -38,8 +38,8 @@ public class LoginService implements LoginInterface{
 
     @Override
     public Login recoveryPassword(String email) {
-       var login = repository.findByEmail(email);
-       return login;
+        var login = repository.findByEmail(email);
+        return login;
     }
 
     @Override
@@ -57,11 +57,24 @@ public class LoginService implements LoginInterface{
         return repository.findAll();
     }
 
-    /*
-    @Override
+    /*@Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
+        Login login = repository.findByUsername(username);
+
+        if (login == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
+
+        Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
+        for (Role role : login.getRoles()) {
+            grantedAuthorities.add(new SimpleGrantedAuthority(role.getName().toString()));
+        }
+
+        return new org.springframework.security.core.userdetails.User(login.getUsername(), login.getPassword(), grantedAuthorities);
+
     }
 
      */
+
+
 }

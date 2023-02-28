@@ -16,6 +16,7 @@ import java.util.UUID;
 @Builder
 public class Login {
 
+
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
@@ -25,6 +26,8 @@ public class Login {
     private String password;
     @Column(name = "email", unique = true)
     private String email;
+
+    //private List<Role> roles;
 
     @OneToMany(mappedBy = "login", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<SentEmail> emails;

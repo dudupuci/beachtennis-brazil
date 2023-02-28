@@ -56,7 +56,6 @@ public class BeachTennisGame implements Serializable {
     @Enumerated(EnumType.STRING)
     private TypeOfSchedule typeOfSchedule;
 
-
     // implementar os game codes apenas para quem for agendar no sistema.
     @Convert(converter = ListOfIntegersConverter.class)
     private List<Integer> gameCodes = new ArrayList<>();

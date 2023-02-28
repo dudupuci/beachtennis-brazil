@@ -7,5 +7,6 @@ import java.util.UUID;
 
 public interface LoginRepository extends JpaRepository<Login, UUID> {
     Login findByUsernameAndPassword(String username, String password);
+    Login findByUsername(String username);
     Login findByEmail(String email);
 }
