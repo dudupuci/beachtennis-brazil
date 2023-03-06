@@ -1,8 +1,9 @@
 package br.com.beachtennisbrazil.api.app.serviceimpl;
 
 import br.com.beachtennisbrazil.api.app.entities.BeachTennisGame;
-import br.com.beachtennisbrazil.api.app.entities.GameWithoutAppointment;
+import br.com.beachtennisbrazil.api.app.entities.GameByAppointment;
 import br.com.beachtennisbrazil.api.app.entities.validation.BeachTennisGameValidator;
+import br.com.beachtennisbrazil.api.app.enums.TypeOfSchedule;
 import br.com.beachtennisbrazil.api.app.exceptions.CannotCreateBeachTennisGameException;
 import br.com.beachtennisbrazil.api.app.exceptions.CannotUpdateBeachTennisGameException;
 import br.com.beachtennisbrazil.api.app.exceptions.EntityNotFoundException;
@@ -10,14 +11,18 @@ import br.com.beachtennisbrazil.api.app.repositories.BeachTennisGameRepository;
 import br.com.beachtennisbrazil.api.app.repositories.PlayerRepository;
 import br.com.beachtennisbrazil.api.app.service.BeachTennisGameServiceInterface;
 import lombok.AllArgsConstructor;
+import org.aspectj.weaver.ast.Instanceof;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Time;
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.time.OffsetTime;
+import java.time.chrono.ChronoLocalDate;
+import java.time.temporal.TemporalAccessor;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -40,23 +45,21 @@ public class BeachTennisGameService implements BeachTennisGameServiceInterface {
     }
 
     @Override
-    public void createBeachTennisGame(GameWithoutAppointment gameWithoutAppointment) {
+    public void createBeachTennisGame(BeachTennisGame beachTennisGame) {
         try {
             BeachTennisGameValidator gameValidator = new BeachTennisGameValidator();
-            var validator = gameValidator.validateIfTheGameCanBeCreated(gameWithoutAppointment);
-            gameWithoutAppointment.setStartTime(LocalTime.of(gameWithoutAppointment.getTimeConverter().getHours(), gameWithoutAppointment.getTimeConverter().getMinutes()));
-            gameWithoutAppointment.setEndTime(gameWithoutAppointment.getStartTime().plusHours(gameWithoutAppointment.getContractedHours().getHour()).plusMinutes(gameWithoutAppointment.getContractedHours().getMinute()));
-            gameWithoutAppointment.setQuantityPlayingNow(gameWithoutAppointment.getGameCodes().size());
+            var validator = gameValidator.validateIfTheGameCanBeCreated(beachTennisGame);
+            beachTennisGame.setStartTime(LocalTime.of(beachTennisGame.getTimeConverter().getHours(), beachTennisGame.getTimeConverter().getMinutes()));
+            beachTennisGame.setEndTime(beachTennisGame.getStartTime().plusHours(beachTennisGame.getContractedHours().getHour()).plusMinutes(beachTennisGame.getContractedHours().getMinute()));
+            beachTennisGame.setQuantityPlayingNow(beachTennisGame.getGameCodes().size());
+            beachTennisGame.setTypeOfSchedule(TypeOfSchedule.RECEPTION);
 
-            for (int i = 0; i < gameWithoutAppointment.getGameCodes().size(); i++) {
-                if (playerRepository.findByGameCode(gameWithoutAppointment.getGameCodes().get(i)).getGameCode() == null ? false : true)
-                    ;
-            }
+            gameCodeValidation(beachTennisGame);
 
-            Set<Integer> hashSetGameCodes = new HashSet<>(gameWithoutAppointment.getGameCodes());
+            Set<Integer> hashSetGameCodes = new HashSet<>(beachTennisGame.getGameCodes());
 
-            if (hashSetGameCodes.size() == gameWithoutAppointment.getGameCodes().size() && validator == true ? true : false) {
-                repository.save(gameWithoutAppointment);
+            if (hashSetGameCodes.size() == beachTennisGame.getGameCodes().size() && validator == true ? true : false) {
+                repository.save(beachTennisGame);
             } else {
                 throw new RuntimeException("");
             }
@@ -64,8 +67,39 @@ public class BeachTennisGameService implements BeachTennisGameServiceInterface {
 
         } catch (Exception err) {
             throw new CannotCreateBeachTennisGameException("Cannot create a game: Please, check the game codes list and try again! " +
-                    "Game codes inserted:" + gameWithoutAppointment.getGameCodes() + " " + err.getMessage());
+                    "Game codes inserted:" + beachTennisGame.getGameCodes() + " " + err.getMessage());
         }
+    }
+
+    @Override
+    public void createBeachTennisGameByAppointment(GameByAppointment gameByAppointment) {
+        try {
+            BeachTennisGameValidator gameValidator = new BeachTennisGameValidator();
+            var validator = gameValidator.validateIfTheGameCanBeCreated(gameByAppointment);
+
+            if (!gameByAppointment.getAppointmentDate().isBefore(ChronoLocalDate.from(LocalDateTime.now()))) {
+                // Criar metodos que facam isto e evitar repeticao
+                gameByAppointment.setEndTime(gameByAppointment.getStartTime().plusHours(gameByAppointment.getContractedHours().getHour()).plusMinutes(gameByAppointment.getContractedHours().getMinute()));
+                gameByAppointment.setQuantityPlayingNow(gameByAppointment.getGameCodes().size());
+                gameByAppointment.setTypeOfSchedule(TypeOfSchedule.SYSTEM);
+            }
+
+            gameCodeValidation(gameByAppointment);
+
+            Set<Integer> hashSetGameCodes = new HashSet<>(gameByAppointment.getGameCodes());
+
+            if (hashSetGameCodes.size() == gameByAppointment.getGameCodes().size() && validator == true ? true : false) {
+                repository.save(gameByAppointment);
+            } else {
+                throw new RuntimeException("");
+            }
+
+
+        } catch (Exception err) {
+            throw new CannotCreateBeachTennisGameException("Cannot create a game: Please, check the game codes list and try again! " +
+                    "Game codes inserted:" + gameByAppointment.getGameCodes() + " " + err.getMessage() + "start: " + gameByAppointment.getStartTime());
+        }
+
     }
 
     @Override
@@ -100,5 +134,13 @@ public class BeachTennisGameService implements BeachTennisGameServiceInterface {
         } catch (Exception err) {
             throw new EntityNotFoundException("Captured error: Game Court ID: " + id + " has not found! " + err.getMessage());
         }
+    }
+
+    public boolean gameCodeValidation(BeachTennisGame game) {
+        for (int i = 0; i < game.getGameCodes().size(); i++) {
+            if (playerRepository.findByGameCode(game.getGameCodes().get(i)).getGameCode() == null ? false : true)
+                ;
+        }
+        return false;
     }
 }

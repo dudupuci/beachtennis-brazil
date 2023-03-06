@@ -48,7 +48,6 @@ public class BeachTennisGame implements Serializable {
     private LocalDate gameDate = LocalDate.now();
     @Transient
     private List<Loanable> loanables = new ArrayList<>();
-
     private Integer quantityPlayingNow;
     @Enumerated(EnumType.STRING)
     private TypeOfGame typeOfGame;

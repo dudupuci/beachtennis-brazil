@@ -1,8 +1,6 @@
 package br.com.beachtennisbrazil.api.system.thymeleaf;
 
-import br.com.beachtennisbrazil.api.app.dto.BeachTennisGameDto;
 import br.com.beachtennisbrazil.api.app.entities.BeachTennisGame;
-import br.com.beachtennisbrazil.api.app.entities.GameWithoutAppointment;
 import br.com.beachtennisbrazil.api.app.serviceimpl.BeachTennisGameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -48,7 +46,7 @@ public class CourtsWebController {
 
 
     @PostMapping("/saveGame")
-    public String saveGame(@ModelAttribute GameWithoutAppointment game) {
+    public String saveGame(@ModelAttribute BeachTennisGame game) {
         service.createBeachTennisGame(game);
         return "redirect:/v1/dashboard/courts";
     }

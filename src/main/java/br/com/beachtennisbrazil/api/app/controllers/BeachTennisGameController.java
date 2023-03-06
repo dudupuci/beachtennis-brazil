@@ -1,8 +1,7 @@
 package br.com.beachtennisbrazil.api.app.controllers;
 
-import br.com.beachtennisbrazil.api.app.dto.BeachTennisGameDto;
 import br.com.beachtennisbrazil.api.app.entities.BeachTennisGame;
-import br.com.beachtennisbrazil.api.app.entities.GameWithoutAppointment;
+import br.com.beachtennisbrazil.api.app.entities.GameByAppointment;
 import br.com.beachtennisbrazil.api.app.serviceimpl.BeachTennisGameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,8 +30,14 @@ public class BeachTennisGameController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> save(@RequestBody GameWithoutAppointment dto) {
+    public ResponseEntity<Void> save(@RequestBody BeachTennisGame dto) {
         service.createBeachTennisGame(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @PostMapping(value = "/appointment")
+    public ResponseEntity<Void> saveGameByAppointment(@RequestBody GameByAppointment game) {
+        service.createBeachTennisGameByAppointment(game);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }
