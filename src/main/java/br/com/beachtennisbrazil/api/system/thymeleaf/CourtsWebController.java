@@ -20,7 +20,7 @@ public class CourtsWebController {
     @Autowired
     private BeachTennisGameService service;
 
-    @GetMapping(value = "/v1/dashboard/courts")
+    @GetMapping(value = "/v1/admin/courts")
     public ModelAndView getAllLogins() {
         ModelAndView mav = new ModelAndView("courts");
         List<BeachTennisGame> list = service.findAll();

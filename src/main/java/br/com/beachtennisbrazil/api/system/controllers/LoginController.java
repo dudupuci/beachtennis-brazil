@@ -1,5 +1,7 @@
 package br.com.beachtennisbrazil.api.system.controllers;
 
+import br.com.beachtennisbrazil.api.app.dto.PlayerSystemAccessDto;
+import br.com.beachtennisbrazil.api.app.serviceimpl.PlayerService;
 import br.com.beachtennisbrazil.api.system.dto.LoginDto;
 import br.com.beachtennisbrazil.api.system.dto.RecoveryPasswordDto;
 import br.com.beachtennisbrazil.api.system.entities.Login;
@@ -20,6 +22,7 @@ public class LoginController {
     @Autowired
     private LoginService service;
 
+
     @GetMapping(value = "/{id}")
     public ResponseEntity<Login> findById(@PathVariable("id") UUID id) {
         return ResponseEntity.ok().body(service.findById(id));
@@ -35,6 +38,13 @@ public class LoginController {
         var authentication = service.authenticate(loginDto.toLogin());
         return ResponseEntity.ok().body(authentication);
     }
+
+    @PostMapping(value = "/player")
+    public ResponseEntity<PlayerSystemAccessDto> authenticatePlayer(@RequestBody @Valid PlayerSystemAccessDto loginDto) {
+        var authentication = service.authenticatePlayer(loginDto);
+        return ResponseEntity.ok().body(authentication);
+    }
+
 
     @PostMapping(value = "/account-lost")
     public ResponseEntity<LoginDto> recoverPassword(@RequestBody RecoveryPasswordDto recovery) {

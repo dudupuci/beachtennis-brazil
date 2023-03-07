@@ -1,8 +1,12 @@
 package br.com.beachtennisbrazil.api.system.entities;
 
+import br.com.beachtennisbrazil.api.app.entities.Player;
 import br.com.beachtennisbrazil.api.system.enums.TypeOfEmailSent;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -18,7 +22,7 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class SentEmail implements Serializable {
+public class SentEmailPlayer implements Serializable {
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -26,9 +30,9 @@ public class SentEmail implements Serializable {
     private UUID id;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-    @JoinColumn(name = "login_id", referencedColumnName = "id")
+    @JoinColumn(name = "player_id", referencedColumnName = "id")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private Login login;
+    private Player player;
 
     @Column(name = "who_received")
     private String to;

@@ -13,6 +13,8 @@ public interface PlayerRepository extends JpaRepository<Player, UUID> {
 
     Player findByGameCode(Integer gameCode);
 
+    Player findByCpfAndGameCode(String cpf, Integer gameCode);
+
     Player findByName(String name);
 
     @Query(value = "select p.name, p.document, p.game_code, p.registration_date, p.telephone FROM player p", nativeQuery = true)

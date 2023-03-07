@@ -1,9 +1,12 @@
 package br.com.beachtennisbrazil.api.system.serviceimpl;
 
+import br.com.beachtennisbrazil.api.app.dto.PlayerSystemAccessDto;
 import br.com.beachtennisbrazil.api.app.exceptions.CannotCreateBeachTennisGameException;
+import br.com.beachtennisbrazil.api.app.repositories.PlayerRepository;
 import br.com.beachtennisbrazil.api.system.dto.LoginDto;
 import br.com.beachtennisbrazil.api.system.entities.Login;
 import br.com.beachtennisbrazil.api.system.exceptions.CannotFindLoginInDatabaseException;
+import br.com.beachtennisbrazil.api.system.exceptions.CannotFindPlayerOrGameCodeException;
 import br.com.beachtennisbrazil.api.system.repositories.LoginRepository;
 import br.com.beachtennisbrazil.api.system.service.LoginInterface;
 import lombok.AllArgsConstructor;
@@ -20,6 +23,9 @@ public class LoginService implements LoginInterface {
     @Autowired
     private LoginRepository repository;
 
+    @Autowired
+    private PlayerRepository playerRepository;
+
 
     @Override
     public Login findById(UUID id) {
@@ -33,6 +39,16 @@ public class LoginService implements LoginInterface {
             return authentication.toDto();
         } else {
             throw new CannotFindLoginInDatabaseException("Forgot your username or password?");
+        }
+    }
+
+    @Override
+    public PlayerSystemAccessDto authenticatePlayer(PlayerSystemAccessDto dto) {
+        var authentication = playerRepository.findByCpfAndGameCode(dto.getCpf(), dto.getGameCode());
+        if (authentication != null) {
+            return authentication.toPlayerSystemAccessDto();
+        } else {
+            throw new CannotFindPlayerOrGameCodeException("Please, verify your CPF or GameCode!");
         }
     }
 

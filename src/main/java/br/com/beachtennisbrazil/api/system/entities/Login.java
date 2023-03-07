@@ -30,7 +30,7 @@ public class Login {
     //private List<Role> roles;
 
     @OneToMany(mappedBy = "login", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<SentEmail> emails;
+    private List<SentEmailAdmin> emails;
 
     public LoginDto toDto() {
         return LoginDto.builder()

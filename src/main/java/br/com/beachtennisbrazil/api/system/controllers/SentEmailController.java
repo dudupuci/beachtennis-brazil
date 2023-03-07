@@ -1,6 +1,6 @@
 package br.com.beachtennisbrazil.api.system.controllers;
 
-import br.com.beachtennisbrazil.api.system.entities.SentEmail;
+import br.com.beachtennisbrazil.api.system.entities.SentEmailAdmin;
 import br.com.beachtennisbrazil.api.system.serviceimpl.SentEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +20,7 @@ public class SentEmailController {
     private SentEmailService service;
 
     @GetMapping
-    public ResponseEntity<List<SentEmail>> findAll() {
+    public ResponseEntity<List<SentEmailAdmin>> findAll() {
         return ResponseEntity.ok().body(service.findAll());
     }
 }

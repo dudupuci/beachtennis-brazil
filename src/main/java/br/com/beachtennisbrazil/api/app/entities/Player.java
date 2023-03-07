@@ -1,6 +1,7 @@
 package br.com.beachtennisbrazil.api.app.entities;
 
 import br.com.beachtennisbrazil.api.app.dto.PlayerDto;
+import br.com.beachtennisbrazil.api.app.dto.PlayerSystemAccessDto;
 import br.com.beachtennisbrazil.api.app.entities.validation.interfaces.GameCodeGeneratorInterface;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -41,6 +42,9 @@ public class Player {
     @Column(name = "telephone")
     private String telephone;
 
+    @Column(name = "email")
+    private String email;
+
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     @JsonFormat(pattern = "YYYY-MM-dd HH:mm")
     private LocalDateTime registrationDate = LocalDateTime.now();
@@ -48,12 +52,19 @@ public class Player {
     public PlayerDto toDto() {
         return PlayerDto.builder()
                 .id(this.id)
-                .name(this.name)
-                .telephone(this.telephone)
                 .cpf(this.cpf)
                 .plan(this.plan)
                 .registrationDate(this.registrationDate)
                 .build();
+    }
+
+    public PlayerSystemAccessDto toPlayerSystemAccessDto() {
+        return PlayerSystemAccessDto.builder()
+                .id(this.id)
+                .cpf(this.cpf)
+                .gameCode(this.gameCode)
+                .build();
+
     }
 
 }
