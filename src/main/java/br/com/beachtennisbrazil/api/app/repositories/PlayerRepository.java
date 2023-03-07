@@ -9,16 +9,14 @@ import java.util.UUID;
 
 public interface PlayerRepository extends JpaRepository<Player, UUID> {
 
-    //@Query(value = "SELECT * FROM player where game_code =:gameCode", nativeQuery = true)
+    //@Query(value = "SELECT * FROM player where access_code =:accessCode", nativeQuery = true)
 
-    Player findByGameCode(Integer gameCode);
+    Player findByAccessCode(Integer accessCode);
 
-    Player findByCpfAndGameCode(String cpf, Integer gameCode);
+    Player findByCpfAndAccessCode(String cpf, Integer accessCode);
 
     Player findByName(String name);
 
-    @Query(value = "select p.name, p.document, p.game_code, p.registration_date, p.telephone FROM player p", nativeQuery = true)
-    List<Player> findAllInformationFromPlayers();
 
 
     Player findByCpf(String cpf);

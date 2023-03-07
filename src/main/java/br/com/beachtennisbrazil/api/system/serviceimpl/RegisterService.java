@@ -72,19 +72,20 @@ public class RegisterService implements RegistrationInterface {
 
             RegisterTemplateMapper template = new RegisterTemplateMapper();
             SentEmailAdmin addressing = new SentEmailAdmin();
+            var subject = TypeOfEmailSent.ADMIN_REGISTRATION;
 
             JavaxMailTemplateSender.configuration(
                     register.getEmail(),
                     DEFAULT_SENDER,
-                    template.getSubject(),
-                    template.getTextMessage(register.getUsername(), register.getPassword()));
+                    template.getRegisterSubject(subject),
+                    template.getRegisterTextMessage(register.getUsername(), register.getPassword(), subject));
 
             addressing.setFrom(DEFAULT_SENDER);
             addressing.setTo(register.getEmail());
-            addressing.setSubject(template.getSubject());
-            addressing.setMessage(template.getTextMessage(register.getUsername(), register.getPassword()));
+            addressing.setSubject(template.getRegisterSubject(subject));
+            addressing.setMessage(template.getRegisterTextMessage(register.getUsername(), register.getPassword(), subject));
             addressing.setSendedMoment(LocalDateTime.now());
-            addressing.setTypeOfEmail(TypeOfEmailSent.REGISTRATION);
+            addressing.setTypeOfEmail(TypeOfEmailSent.ADMIN_REGISTRATION);
             addressing.setLogin(login);
             emailsRepository.save(addressing);
 
@@ -102,19 +103,19 @@ public class RegisterService implements RegistrationInterface {
 
             RegisterTemplateMapper template = new RegisterTemplateMapper();
             SentEmailPlayer addressing = new SentEmailPlayer();
-
+            var subject = TypeOfEmailSent.PLAYER_REGISTRATION;
             JavaxMailTemplateSender.configuration(
                     player.getEmail(),
                     DEFAULT_SENDER,
-                    template.getSubject(),
-                    template.getTextMessage(player.getName(), player.getGameCode().toString()));
+                    template.getRegisterSubject(subject),
+                    template.getRegisterTextMessage(player.getCpf(), player.getAccessCode().toString(), subject));
 
             addressing.setFrom(DEFAULT_SENDER);
             addressing.setTo(player.getEmail());
-            addressing.setSubject(template.getSubject());
-            addressing.setMessage(template.getTextMessage(player.getName(), player.getGameCode().toString()));
+            addressing.setSubject(template.getRegisterSubject(subject));
+            addressing.setMessage(template.getRegisterTextMessage(player.getCpf(), player.getAccessCode().toString(), subject));
             addressing.setSendedMoment(LocalDateTime.now());
-            addressing.setTypeOfEmail(TypeOfEmailSent.REGISTRATION);
+            addressing.setTypeOfEmail(TypeOfEmailSent.PLAYER_REGISTRATION);
             addressing.setPlayer(player);
             emailsPlayerRepository.save(addressing);
 

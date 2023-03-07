@@ -57,6 +57,6 @@ public class BeachTennisGame implements Serializable {
 
     // implementar os game codes apenas para quem for agendar no sistema.
     @Convert(converter = ListOfIntegersConverter.class)
-    private List<Integer> gameCodes = new ArrayList<>();
+    private List<Integer> accessCodes = new ArrayList<>();
 
 }

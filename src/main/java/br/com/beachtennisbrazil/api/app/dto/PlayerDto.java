@@ -17,7 +17,7 @@ public class PlayerDto {
     private UUID id;
     private String cpf;
     private SubscriptionPlan plan;
-    private Integer gameCode;
+    private Integer accessCode;
     private LocalDateTime registrationDate;
     public Player toEntity() {
         return Player.builder()

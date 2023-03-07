@@ -23,18 +23,13 @@ public class PlayerService implements PlayerServiceInterface {
     }
 
     @Override
-    public List<Player> findAllInformationFromPlayers() {
-        return repository.findAllInformationFromPlayers();
-    }
-
-    @Override
     public Player findById(UUID id) {
         return repository.findById(id).orElseThrow(() -> new RuntimeException(""));
     }
 
     @Override
-    public Player findByGameCode(Integer gameCode) {
-        return repository.findByGameCode(gameCode);
+    public Player findByaccessCode(Integer accessCode) {
+        return repository.findByAccessCode(accessCode);
     }
 
     @Override

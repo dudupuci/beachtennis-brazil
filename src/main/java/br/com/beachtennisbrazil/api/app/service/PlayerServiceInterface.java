@@ -8,9 +8,8 @@ import java.util.UUID;
 public interface PlayerServiceInterface {
 
     List<Player> findAll();
-    List<Player> findAllInformationFromPlayers();
     Player findById(UUID id);
-    Player findByGameCode(Integer gameCode);
+    Player findByaccessCode(Integer accessCode);
     Player findByName(String name);
     Player findByCpf(String cpf);
     void save(Player player);

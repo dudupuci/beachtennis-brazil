@@ -48,7 +48,7 @@ public class LoginWebController {
     @PostMapping("/authenticatePlayer")
     public String authenticatePlayer(@ModelAttribute PlayerSystemAccessDto dto) {
         service.authenticatePlayer(dto);
-        return "redirect:/home";
+        return "redirect:/home-player";
     }
 
     @GetMapping(value = "/home")

@@ -12,9 +12,9 @@ public class BeachTennisGameValidator implements BeachTennisGameValidatorInterfa
 
     @Override
     public boolean validateIfTheGameCanBeCreated(BeachTennisGame beachTennisGame) {
-        if (beachTennisGame.getGameCodes().size() < 2 || beachTennisGame.getContractedHours().getHour() < 1) {
+        if (beachTennisGame.getAccessCodes().size() < 2 || beachTennisGame.getContractedHours().getHour() < 1) {
             throw new CannotCreateBeachTennisGameException(
-                    "Please, check the fields: Players count: " + beachTennisGame.getGameCodes().size()
+                    "Please, check the fields: Players count: " + beachTennisGame.getAccessCodes().size()
                             + " and hours: " + beachTennisGame.getContractedHours());
         }
         return true;

@@ -11,18 +11,16 @@ import br.com.beachtennisbrazil.api.app.repositories.BeachTennisGameRepository;
 import br.com.beachtennisbrazil.api.app.repositories.PlayerRepository;
 import br.com.beachtennisbrazil.api.app.service.BeachTennisGameServiceInterface;
 import lombok.AllArgsConstructor;
-import org.aspectj.weaver.ast.Instanceof;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Time;
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.OffsetTime;
 import java.time.chrono.ChronoLocalDate;
-import java.time.temporal.TemporalAccessor;
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -51,14 +49,14 @@ public class BeachTennisGameService implements BeachTennisGameServiceInterface {
             var validator = gameValidator.validateIfTheGameCanBeCreated(beachTennisGame);
             beachTennisGame.setStartTime(LocalTime.of(beachTennisGame.getTimeConverter().getHours(), beachTennisGame.getTimeConverter().getMinutes()));
             beachTennisGame.setEndTime(beachTennisGame.getStartTime().plusHours(beachTennisGame.getContractedHours().getHour()).plusMinutes(beachTennisGame.getContractedHours().getMinute()));
-            beachTennisGame.setQuantityPlayingNow(beachTennisGame.getGameCodes().size());
+            beachTennisGame.setQuantityPlayingNow(beachTennisGame.getAccessCodes().size());
             beachTennisGame.setTypeOfSchedule(TypeOfSchedule.RECEPTION);
 
-            gameCodeValidation(beachTennisGame);
+            accessCodeValidation(beachTennisGame);
 
-            Set<Integer> hashSetGameCodes = new HashSet<>(beachTennisGame.getGameCodes());
+            Set<Integer> hashSetaccessCodes = new HashSet<>(beachTennisGame.getAccessCodes());
 
-            if (hashSetGameCodes.size() == beachTennisGame.getGameCodes().size() && validator == true ? true : false) {
+            if (hashSetaccessCodes.size() == beachTennisGame.getAccessCodes().size() && validator == true ? true : false) {
                 repository.save(beachTennisGame);
             } else {
                 throw new RuntimeException("");
@@ -67,7 +65,7 @@ public class BeachTennisGameService implements BeachTennisGameServiceInterface {
 
         } catch (Exception err) {
             throw new CannotCreateBeachTennisGameException("Cannot create a game: Please, check the game codes list and try again! " +
-                    "Game codes inserted:" + beachTennisGame.getGameCodes() + " " + err.getMessage());
+                    "Game codes inserted:" + beachTennisGame.getAccessCodes() + " " + err.getMessage());
         }
     }
 
@@ -80,15 +78,15 @@ public class BeachTennisGameService implements BeachTennisGameServiceInterface {
             if (!gameByAppointment.getAppointmentDate().isBefore(ChronoLocalDate.from(LocalDateTime.now()))) {
                 // Criar metodos que facam isto e evitar repeticao
                 gameByAppointment.setEndTime(gameByAppointment.getStartTime().plusHours(gameByAppointment.getContractedHours().getHour()).plusMinutes(gameByAppointment.getContractedHours().getMinute()));
-                gameByAppointment.setQuantityPlayingNow(gameByAppointment.getGameCodes().size());
+                gameByAppointment.setQuantityPlayingNow(gameByAppointment.getAccessCodes().size());
                 gameByAppointment.setTypeOfSchedule(TypeOfSchedule.SYSTEM);
             }
 
-            gameCodeValidation(gameByAppointment);
+            accessCodeValidation(gameByAppointment);
 
-            Set<Integer> hashSetGameCodes = new HashSet<>(gameByAppointment.getGameCodes());
+            Set<Integer> hashSetaccessCodes = new HashSet<>(gameByAppointment.getAccessCodes());
 
-            if (hashSetGameCodes.size() == gameByAppointment.getGameCodes().size() && validator == true ? true : false) {
+            if (hashSetaccessCodes.size() == gameByAppointment.getAccessCodes().size() && validator == true ? true : false) {
                 repository.save(gameByAppointment);
             } else {
                 throw new RuntimeException("");
@@ -97,7 +95,7 @@ public class BeachTennisGameService implements BeachTennisGameServiceInterface {
 
         } catch (Exception err) {
             throw new CannotCreateBeachTennisGameException("Cannot create a game: Please, check the game codes list and try again! " +
-                    "Game codes inserted:" + gameByAppointment.getGameCodes() + " " + err.getMessage() + "start: " + gameByAppointment.getStartTime());
+                    "Game codes inserted:" + gameByAppointment.getAccessCodes() + " " + err.getMessage() + "start: " + gameByAppointment.getStartTime());
         }
 
     }
@@ -106,7 +104,7 @@ public class BeachTennisGameService implements BeachTennisGameServiceInterface {
     public void updateBeachTennisGameData(BeachTennisGame oldBeachTennisGame, BeachTennisGame newBeachTennisGame) {
         oldBeachTennisGame.setGameDate(newBeachTennisGame.getGameDate());
         oldBeachTennisGame.setTypeOfGame(newBeachTennisGame.getTypeOfGame());
-        oldBeachTennisGame.setGameCodes(newBeachTennisGame.getGameCodes());
+        oldBeachTennisGame.setAccessCodes(newBeachTennisGame.getAccessCodes());
         oldBeachTennisGame.setStartTime(newBeachTennisGame.getStartTime());
         oldBeachTennisGame.setContractedHours(newBeachTennisGame.getContractedHours());
         oldBeachTennisGame.setQuantityPlayingNow(newBeachTennisGame.getQuantityPlayingNow());
@@ -136,9 +134,9 @@ public class BeachTennisGameService implements BeachTennisGameServiceInterface {
         }
     }
 
-    public boolean gameCodeValidation(BeachTennisGame game) {
-        for (int i = 0; i < game.getGameCodes().size(); i++) {
-            if (playerRepository.findByGameCode(game.getGameCodes().get(i)).getGameCode() == null ? false : true)
+    public boolean accessCodeValidation(BeachTennisGame game) {
+        for (int i = 0; i < game.getAccessCodes().size(); i++) {
+            if (playerRepository.findByAccessCode(game.getAccessCodes().get(i)).getAccessCode() == null ? false : true)
                 ;
         }
         return false;

@@ -1,7 +1,8 @@
 package br.com.beachtennisbrazil.api.system.enums;
 
 public enum TypeOfEmailSent {
-    REGISTRATION("Registration"),
+    ADMIN_REGISTRATION("Admin Registration"),
+    PLAYER_REGISTRATION("Player Registration"),
     CONFIRMATION("Confirmation"),
     NEW_LOGIN_CAPTURED("New Login Captured"),
     REQUEST("Request");

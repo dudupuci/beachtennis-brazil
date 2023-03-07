@@ -1,5 +1,7 @@
 package br.com.beachtennisbrazil.api.system.controllers;
 
+import br.com.beachtennisbrazil.api.app.entities.Player;
+import br.com.beachtennisbrazil.api.app.repositories.PlayerRepository;
 import br.com.beachtennisbrazil.api.system.entities.Register;
 import br.com.beachtennisbrazil.api.system.serviceimpl.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;

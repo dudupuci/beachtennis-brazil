@@ -16,12 +16,12 @@ public class PlayerSystemAccessDto {
 
     private UUID id;
     private String cpf;
-    private Integer gameCode;
+    private Integer accessCode;
     public Player toEntity() {
         return Player.builder()
                 .id(this.id)
                 .cpf(this.cpf)
-                .gameCode(this.gameCode)
+                .accessCode(this.accessCode)
                 .build();
     }
 }

@@ -6,7 +6,7 @@ import br.com.beachtennisbrazil.api.app.repositories.PlayerRepository;
 import br.com.beachtennisbrazil.api.system.dto.LoginDto;
 import br.com.beachtennisbrazil.api.system.entities.Login;
 import br.com.beachtennisbrazil.api.system.exceptions.CannotFindLoginInDatabaseException;
-import br.com.beachtennisbrazil.api.system.exceptions.CannotFindPlayerOrGameCodeException;
+import br.com.beachtennisbrazil.api.system.exceptions.CannotFindPlayerOrAccessCodeException;
 import br.com.beachtennisbrazil.api.system.repositories.LoginRepository;
 import br.com.beachtennisbrazil.api.system.service.LoginInterface;
 import lombok.AllArgsConstructor;
@@ -44,11 +44,11 @@ public class LoginService implements LoginInterface {
 
     @Override
     public PlayerSystemAccessDto authenticatePlayer(PlayerSystemAccessDto dto) {
-        var authentication = playerRepository.findByCpfAndGameCode(dto.getCpf(), dto.getGameCode());
+        var authentication = playerRepository.findByCpfAndAccessCode(dto.getCpf(), dto.getAccessCode());
         if (authentication != null) {
             return authentication.toPlayerSystemAccessDto();
         } else {
-            throw new CannotFindPlayerOrGameCodeException("Please, verify your CPF or GameCode!");
+            throw new CannotFindPlayerOrAccessCodeException("Please, verify your CPF or accessCode!");
         }
     }
 

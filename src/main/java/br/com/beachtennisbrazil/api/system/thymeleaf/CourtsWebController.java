@@ -33,7 +33,7 @@ public class CourtsWebController {
     @GetMapping("/delete/{id}")
     public String deleteBeachTennisGame(@PathVariable("id") UUID id, Model model) {
         service.deleteBeachTennisGameById(id);
-        return "redirect:/v1/dashboard/courts";
+        return "redirect:/v1/admin/courts";
     }
 
    @GetMapping("/courts")

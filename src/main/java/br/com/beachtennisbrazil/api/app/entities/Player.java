@@ -2,7 +2,7 @@ package br.com.beachtennisbrazil.api.app.entities;
 
 import br.com.beachtennisbrazil.api.app.dto.PlayerDto;
 import br.com.beachtennisbrazil.api.app.dto.PlayerSystemAccessDto;
-import br.com.beachtennisbrazil.api.app.entities.validation.interfaces.GameCodeGeneratorInterface;
+import br.com.beachtennisbrazil.api.app.entities.validation.interfaces.AccessCodeGeneratorInterface;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.*;
@@ -31,8 +31,8 @@ public class Player {
     @JoinColumn(name = "plan_id")
     private SubscriptionPlan plan;
 
-    @Column(name = "game_code", unique = true)
-    private Integer gameCode = GameCodeGeneratorInterface.getUniqueRandomGameCode();
+    @Column(name = "access_code", unique = true)
+    private Integer accessCode = AccessCodeGeneratorInterface.getUniqueRandomAccessCode();
     @Column(name = "name")
     private String name;
 
@@ -62,7 +62,7 @@ public class Player {
         return PlayerSystemAccessDto.builder()
                 .id(this.id)
                 .cpf(this.cpf)
-                .gameCode(this.gameCode)
+                .accessCode(this.accessCode)
                 .build();
 
     }

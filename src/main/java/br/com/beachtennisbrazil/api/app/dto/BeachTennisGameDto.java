@@ -27,7 +27,7 @@ public class BeachTennisGameDto {
     private List<Loanable> loanables = new ArrayList<>();
     private Integer quantityPlayingNow;
     private TypeOfGame typeOfGame;
-    private List<Integer> gameCodes = new ArrayList<>();
+    private List<Integer> accessCodes = new ArrayList<>();
 
     public BeachTennisGame toEntity() {
         return BeachTennisGame.builder()
@@ -40,7 +40,7 @@ public class BeachTennisGameDto {
                 .loanables(this.loanables)
                 .quantityPlayingNow(this.quantityPlayingNow)
                 .typeOfGame(this.typeOfGame)
-                .gameCodes(this.gameCodes)
+                .accessCodes(this.accessCodes)
                 .build();
     }
 }
