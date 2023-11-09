@@ -7,9 +7,9 @@ spring:
       platform: postgres
       mode: always
   datasource:
-    url: jdbc:postgresql://localhost:5432/beachtennisbrazil
-    username: postgres
-    password: orp101099
+    url: ${PROD_DB_HOST}
+    username: ${PROD_DB_USERNAME}
+    password: ${PROD_DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
   jpa:
     open-in-view: true

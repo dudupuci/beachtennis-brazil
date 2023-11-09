@@ -25,7 +25,7 @@ public class RegisterWebController {
         return mav;
     }
 
-    @GetMapping("player/register") //
+    @GetMapping("player/register")
     public ModelAndView addPlayerRegisterForm() {
         ModelAndView mav = new ModelAndView("register-player");
         Player player = new Player();
